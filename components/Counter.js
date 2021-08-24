@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
+import Button from 'react-bootstrap/Button';
 
 const Counter = observer((props) => {
   // use store from the store context
@@ -9,8 +10,8 @@ const Counter = observer((props) => {
   return (
     <div className={counter.light ? 'light' : ''}>
       {counter.count}
-      <button onClick = {()=> counter.increment()}>+</button>
-      <button onClick = {()=> counter.decrement()}>-</button>
+      <Button onClick = {()=> counter.increment()}>+</Button>
+      <Button onClick = {()=> counter.decrement()}>-</Button>
       <style jsx>{`
         div {
           padding: 15px;

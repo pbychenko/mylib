@@ -2,7 +2,7 @@ import Page from '../components/Page'
 
 const t = {
   counter: 122,
-  todo: [{id:1, title: 'dd'}, {id:1, title: 'd2'}]
+  todo: [{id:1, title: 'dd'}, {id:2, title: 'd2'}]
 }
 
 export default function SSG() {
