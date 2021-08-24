@@ -58,8 +58,8 @@ export class Store {
 
   constructor() {
     // makeAutoObservable(this)
-    this.counter = new Counter(this);
-    this.todo = new Todo(this);
+    this.counter = new Counter();
+    this.todo = new Todo();
   }
 
   hydrate(data) {

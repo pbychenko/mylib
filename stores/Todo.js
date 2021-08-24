@@ -7,9 +7,14 @@ export default class Todo {
   todos = []
   rootStore
 
-  constructor(rootStore) {
-    makeAutoObservable(this, { rootStore: false })
-    this.rootStore = rootStore
+  // constructor(rootStore) {
+  //   makeAutoObservable(this, { rootStore: false })
+  //   this.rootStore = rootStore
+  // }
+
+  constructor() {
+    makeAutoObservable(this)
+    // this.rootStore = rootStore
   }
 
   addItem(item) {    
@@ -18,6 +23,10 @@ export default class Todo {
 
   deleteItem(id) {
     this.todos = this.todos.filter(el => el.id !== id);
+  }
+
+  changeItem(id) {
+    this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
   }
 
   get todo() {

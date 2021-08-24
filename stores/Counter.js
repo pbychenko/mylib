@@ -6,12 +6,18 @@ enableStaticRendering(typeof window === 'undefined')
 
 export default class Counter {
   count
-  rootStore
+  // rootStore
 
-  constructor(rootStore) {
-    // makeAutoObservable(this)
-    makeAutoObservable(this, { rootStore: false })
-    this.rootStore = rootStore
+  // constructor(rootStore) {
+  //   // makeAutoObservable(this)
+  //   makeAutoObservable(this, { rootStore: false })
+  //   this.rootStore = rootStore
+  // }
+
+  constructor() {
+    makeAutoObservable(this)
+    // makeAutoObservable(this, { rootStore: false })
+    // this.rootStore = rootStore
   }
 
   increment() {

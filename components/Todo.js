@@ -9,7 +9,10 @@ const Counter = observer((props) => {
   return (
     <ul>
       {todo.todos.map(el => ( 
-        <li key={el.id}>{el.title}</li>
+        <li key={el.id}>
+          {el.title}
+          <button onClick = {()=> todo.changeItem(el.id)}></button>
+        </li>
       ))}
     </ul>
   )

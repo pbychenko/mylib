@@ -19,7 +19,7 @@ export function StoreProvider({ children, initialState: initialData }) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
-function initializeStore(initialData = {counter: 1, todo: [ { id:1, title:'a'} ]}) {
+function initializeStore(initialData = {counter: 1, todo: [ { id:1, title:'a'}, { id:2, title:'b'} ]}) {
   console.log('test')
   const _store = store ?? new Store()
 
