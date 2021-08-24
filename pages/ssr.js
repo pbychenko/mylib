@@ -8,5 +8,5 @@ export default function SSR() {
 // that is because the page becomes a serverless function instead of being statically
 // exported when you use `getServerSideProps` or `getInitialProps`
 export function getServerSideProps() {
-  return { props: { initialState: { lastUpdate: Date.now() } } }
+  return { props: { initialState: { counter: 17, todo: [{id:1, title:'y'} ]} } }
 }
