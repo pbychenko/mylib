@@ -11,6 +11,8 @@ const Navibar = observer((props) => {
             <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
                 <Nav.Link href="#features">Каталог</Nav.Link>
+                <Nav.Link href="#features">Авторы</Nav.Link>
+                <Nav.Link href="#features">Пользователи</Nav.Link>
             </Nav>
             <Nav>
                 <Nav.Link eventKey={2} href="#memes">

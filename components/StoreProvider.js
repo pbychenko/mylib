@@ -19,6 +19,27 @@ export function StoreProvider({ children, initialState: initialData }) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
+const books = [
+  {
+    id:1,
+    autor: 'Пелевин',
+    title: 'Амун Ра',
+    isTaken: false,
+  },
+  {
+    id:2,
+    autor: 'Акунин',
+    title: 'Рассказы',
+    isTaken: true,
+  },
+  {
+    id:1,
+    autor: 'Толстой',
+    title: 'Война и мир',
+    isTaken: false,
+  },
+];
+
 function initializeStore(initialData = {counter: 1, todo: [ { id:1, title:'a'}, { id:2, title:'b'} ]}) {
   console.log('test')
   const _store = store ?? new Store()
