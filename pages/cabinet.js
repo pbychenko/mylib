@@ -5,7 +5,10 @@ import BookList from '../components/BookList';
 import { Container, Button, Form } from 'react-bootstrap';
 import Image from 'next/image'
 
-const Book= () => {
+const Cabinet= ({ books, userData }) => {
+  // console.log(books)
+  // console.log(userData)
+  const [ user ] = userData
   return (
     <>      
       <Navibar />
@@ -15,17 +18,17 @@ const Book= () => {
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Имя</Form.Label>
-                <Form.Control placeholder="Ваше имя" />
+                <Form.Control placeholder="Ваше имя" value ={user.name}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Фамилия</Form.Label>
-                <Form.Control placeholder="Ваше имя" />
+                <Form.Control placeholder="Ваша фамилия" value={user.lastName} />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control type="email" placeholder="Enter email" value={user.email}/>
                 </Form.Group>
             </Row>
 
@@ -34,10 +37,47 @@ const Book= () => {
             </Button>
          </Form>
           <h2>Взятые книги</h2>
-          <BookList />
+          <BookList books={books}/>
       </Container>
     </>
   )
 }
 
-export default Book;
+export default Cabinet;
+
+export function getServerSideProps() {
+  const books = [
+    {
+      id:1,
+      autor: 'Пелевин',
+      title: 'Амун Ра',
+      holder: 'Иван',
+      isTaken: true,
+    },
+    {
+      id:2,
+      autor: 'Акунин',
+      title: 'Рассказы',
+      holder: null,
+      isTaken: false,
+    },
+    {
+      id:1,
+      autor: 'Толстой',
+      title: 'Война и мир',
+      holder: 'Настя',
+      isTaken: true,
+    },
+  ];
+
+  const userData = [
+    {
+      id: 1,
+      name: 'Павел',
+      lastName: 'Быченко',
+      email: 'cbpa@technodom.kz',
+    }
+  ];
+
+  return { props: { books, userData } }
+}

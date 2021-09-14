@@ -21,8 +21,9 @@ const BookList = ({books}) => { //observer(({books}) => {
                     <Card.Body> 
                     <Card.Title>{book.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{book.autor}</Card.Subtitle>
-                    <Card.Text> Кто взял </Card.Text>
+                    {/* <Card.Text> Кто взял </Card.Text> */}
                     {book.isTaken ? null: (<Button variant="primary">Взять</Button>)}
+                    {book.isTaken ? (<Card.Text> Кто взял: {book.holder}  </Card.Text>) : null}
                     </Card.Body>
                 </Card>
             </Col>)

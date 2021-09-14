@@ -30,19 +30,22 @@ export function getServerSideProps() {
       id:1,
       autor: 'Пелевин',
       title: 'Амун Ра',
-      isTaken: false,
+      holder: 'Иван',
+      isTaken: true,
     },
     {
       id:2,
       autor: 'Акунин',
       title: 'Рассказы',
-      isTaken: true,
+      holder: null,
+      isTaken: false,
     },
     {
       id:1,
       autor: 'Толстой',
       title: 'Война и мир',
-      isTaken: false,
+      holder: 'Настя',
+      isTaken: true,
     },
   ];
   return { props: { books } }
