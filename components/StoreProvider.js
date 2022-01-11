@@ -19,31 +19,35 @@ export function StoreProvider({ children, initialState: initialData }) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
-const books = [
-  {
-    id:1,
-    autor: 'Пелевин',
-    title: 'Амун Ра',
-    isTaken: false,
-  },
-  {
-    id:2,
-    autor: 'Акунин',
-    title: 'Рассказы',
-    isTaken: true,
-  },
-  {
-    id:1,
-    autor: 'Толстой',
-    title: 'Война и мир',
-    isTaken: false,
-  },
-];
+// const books = [
+//   {
+//     id:1,
+//     autor: 'Пелевин',
+//     title: 'Амун Ра',
+//     isTaken: false,
+//   },
+//   {
+//     id:2,
+//     autor: 'Акунин',
+//     title: 'Рассказы',
+//     isTaken: true,
+//   },
+//   {
+//     id:1,
+//     autor: 'Толстой',
+//     title: 'Война и мир',
+//     isTaken: false,
+//   },
+// ];
 
-function initializeStore(initialData = {counter: 1, todo: [ { id:1, title:'a'}, { id:2, title:'b'} ]}) {
-  console.log('test')
+function initializeStore(initialData = {counter: 1,
+  todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
+  genres: [ { id:1, title:'c'}, { id:2, title:'d'}],
+}) {
+  // console.log('test')
   const _store = store ?? new Store()
-
+  // console.log(_store.genres)
+  // _store.genres.fetchGenres()
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details
   if (initialData) {

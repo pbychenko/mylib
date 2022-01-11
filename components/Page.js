@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import Counter from './Counter'
 import Todo from './Todo'
+import Genres from './Genres'
 import { useStore } from './StoreProvider'
 
 const Page = observer(function Page(props) {
@@ -24,6 +25,8 @@ const Page = observer(function Page(props) {
       <h1>{props.title}</h1>
       <Counter />
       <Todo />
+      <Genres />
+      
       <nav>
         <Link href={props.linkTo}>
           <a>Navigate</a>

@@ -16,8 +16,6 @@ export default class Counter {
 
   constructor() {
     makeAutoObservable(this)
-    // makeAutoObservable(this, { rootStore: false })
-    // this.rootStore = rootStore
   }
 
   increment() {

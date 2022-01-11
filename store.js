@@ -49,17 +49,16 @@ import {  makeAutoObservable } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
 import Counter from './stores/Counter';
 import Todo from './stores/Todo';
+import Genres from './stores/Genres';
 
 enableStaticRendering(typeof window === 'undefined')
 
 export class Store {
-  // counter = new Counter();
-  // todo = new Todo();
-
   constructor() {
-    // makeAutoObservable(this)
+    makeAutoObservable(this)
     this.counter = new Counter();
     this.todo = new Todo();
+    this.genres = new Genres();
   }
 
   hydrate(data) {
@@ -67,5 +66,6 @@ export class Store {
 
     this.counter.hydrate(data.counter);
     this.todo.hydrate(data.todo);
+    this.genres.hydrate(data.genres);
   }
 }
