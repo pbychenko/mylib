@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 const Counter = observer((props) => {
   // use store from the store context
   const { counter } = useStore()
-  console.log(counter.count)
+  // console.log(counter.count)
 
   return (
     <div className={counter.light ? 'light' : ''}>

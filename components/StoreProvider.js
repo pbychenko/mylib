@@ -44,6 +44,7 @@ function initializeStore(initialData = {counter: 1,
   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
   genres: [ { id:1, title:'c'}, { id:2, title:'d'}],
 }) {
+  // function initializeStore(initialData = null) {
   // console.log('test')
   const _store = store ?? new Store()
   // console.log(_store.genres)

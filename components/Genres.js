@@ -5,7 +5,7 @@ const Genres = observer((props) => {
   // use store from the store context
   const { genres } = useStore();
   // genres.fetchGenres()
-  genres.fetchGenres()
+  // genres.fetchGenres()
 
   return (
     <ul>

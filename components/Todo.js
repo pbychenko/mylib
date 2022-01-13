@@ -4,7 +4,9 @@ import { useStore } from './StoreProvider'
 const Todo = observer((props) => {
   // use store from the store context
   const { todo } = useStore()
-  // console.log(todo)
+  // const store = useStore()
+  
+  // console.log(todo.todos)
 
   return (
     <ul>
