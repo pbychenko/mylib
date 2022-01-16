@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
-const GenresList = ({genres}) => { //observer(({genres}) => {
+const GenresList = observer(({genres}) => { //observer(({genres}) => {
   // const { genres } = useStore();
   // console.log('test2', genres)
   return (
@@ -18,6 +18,6 @@ const GenresList = ({genres}) => { //observer(({genres}) => {
         )}
     </Row>
   )
-}
+})
 
 export default GenresList;

@@ -40,15 +40,19 @@ export function StoreProvider({ children, initialState: initialData }) {
 //   },
 // ];
 
-function initializeStore(initialData = {counter: 1,
+// function initializeStore(initialData = {counter: 2,
+//   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
+//   genres: [ { id:1, title:'c'}, { id:2, title:'d'}],
+// }) {
+function initializeStore(initialData = {counter: 2,
   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
-  genres: [ { id:1, title:'c'}, { id:2, title:'d'}],
-}) {
+  genres: []}) {
+    // console.log(initialData.genres)
   // function initializeStore(initialData = null) {
-  // console.log('test')
+  console.log('test')
   const _store = store ?? new Store()
   // console.log(_store.genres)
-  // _store.genres.fetchGenres()
+  _store.genres.fetchGenres()
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details
   if (initialData) {

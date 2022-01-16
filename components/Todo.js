@@ -13,8 +13,9 @@ const Todo = observer((props) => {
       {todo.todos.map(el => ( 
         <li key={el.id}>
           {el.title}
-          <button onClick = {()=> todo.changeItem(el.id)}></button>
-          {/* <button onClick = {()=> todo.deleteItem(el.id)}></button> */}
+          {/* <button onClick = {()=> todo.changeItem(el.id)}></button> */}
+          <button onClick = {()=> todo.addItem({id:1, title: 'test'})}></button>
+          {/* <Button variant="primary" onClick={()=> genres.addGenre()}>Добавить жанр</Button> */}
         </li>
       ))}
     </ul>

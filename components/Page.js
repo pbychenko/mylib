@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import Counter from './Counter'
 import Todo from './Todo'
-import Genres from './Genres'
+// import Genres from './Genress'
 import { useStore } from './StoreProvider'
 
-const Page = observer(function Page(props) {
+const Page = observer((props) => {
   // use store from the store context
   // const store = useStore()
 

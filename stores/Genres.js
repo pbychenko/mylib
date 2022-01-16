@@ -1,5 +1,6 @@
-import {  makeAutoObservable } from 'mobx'
+import { runInAction, makeAutoObservable } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
+import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -17,8 +18,22 @@ export default class Genres {
     // this.rootStore = rootStore
   }
 
-  // addItem(item) {    
-  //   this.todos.push(item);
+  addGenre = async () => {
+    const res = await axios.post('http://localhost:3333/api/genres', {
+      title: 'test1',
+    });
+    console.log(res.data)    
+    this.genres.push({id:res.data, title: 'test1'});
+  }
+
+  // addGenre() {
+  //   // const res = await axios.post('http://localhost:3333/api/genres', {
+  //   //   title: 'test',
+  //   // });
+  //   console.log('in add')
+  //   // console.log(this.genres)   
+  //   this.genres.push({id: 142, title: 'god'});
+  //   // console.log(this.genres) 
   // }
 
   // deleteItem(id) {
@@ -29,19 +44,18 @@ export default class Genres {
   //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
   // }
 
-  fetchGenres() {
-   fetch('http://localhost:3333/api/genres').then(res => 
-    // await runMiddleware(req, res, cors) 
-    res.json())
-  //   fetch('https://jsonplaceholder.typicode.com/todos/1')
-  // .then(response => response.json())
-  .then(json => console.log(json))
-    // this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
+  fetchGenres = async () => {
+    const genres = (await axios.get('http://localhost:3333/api/genres')).data;
+
+
+    runInAction(() => {
+      this.genres = genres;      
+    })
   }
 
-  // get todo() {
-  //   return this.todos;
-  // }
+  get genresData() {
+    return this.genres;
+  }
 
   hydrate = (data) => {
     if (!data) return;
