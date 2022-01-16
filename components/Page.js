@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import Counter from './Counter'
 import Todo from './Todo'
-// import Genres from './Genress'
+import GenresList from './GenresList'
 import { useStore } from './StoreProvider'
 
 const Page = observer((props) => {
   // use store from the store context
-  // const store = useStore()
+  const {genres} = useStore()
 
   //start the clock when the component is mounted
   // useEffect(() => {
@@ -25,7 +25,7 @@ const Page = observer((props) => {
       <h1>{props.title}</h1>
       <Counter />
       <Todo />
-      <Genres />
+      <GenresList genres={genres.genres}/>
       
       <nav>
         <Link href={props.linkTo}>
