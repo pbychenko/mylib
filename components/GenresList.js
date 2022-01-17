@@ -1,22 +1,25 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
-const GenresList = observer(({genres}) => { //observer(({genres}) => {
-  // const { genres } = useStore();
-  // console.log('test2', genres)
+
+const GenresList = observer(() => { //observer(({genres}) => {
+  const { genres } = useStore();
   return (
-    <Row>     
-        {genres.map((genre) => 
-          (<Col key={genre.id} md={3}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body> 
-              <Card.Title>{genre.title}</Card.Title>              
-              </Card.Body>
-            </Card>
-          </Col>
-        )
-        )}
-    </Row>
+    <>
+      <Row>     
+          {genres.genres.map((genre) => 
+            (<Col key={genre.id} md={3}>
+              <Card style={{ width: '18rem' }}>
+                <Card.Body> 
+                <Card.Title>{genre.title}</Card.Title>              
+                </Card.Body>
+              </Card>
+            </Col>
+          )
+          )}          
+      </Row>
+      <Button variant="primary" onClick={()=> genres.addGenre()}>Добавить жанр</Button>
+    </>    
   )
 })
 

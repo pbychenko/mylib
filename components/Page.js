@@ -25,7 +25,7 @@ const Page = observer((props) => {
       <h1>{props.title}</h1>
       <Counter />
       <Todo />
-      <GenresList genres={genres.genres}/>
+      {/* <GenresList genres={genres.genres}/> */}
       
       <nav>
         <Link href={props.linkTo}>
