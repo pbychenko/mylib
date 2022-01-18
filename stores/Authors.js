@@ -28,16 +28,6 @@ export default class Authors {
     this.authors.push({id: res.data, name, last_name: lastName});
   }
 
-  // addGenre() {
-  //   // const res = await axios.post('http://localhost:3333/api/genres', {
-  //   //   title: 'test',
-  //   // });
-  //   console.log('in add')
-  //   // console.log(this.genres)   
-  //   this.genres.push({id: 142, title: 'god'});
-  //   // console.log(this.genres) 
-  // }
-
   // deleteItem(id) {
   //   this.todos = this.todos.filter(el => el.id !== id);
   // }
