@@ -50,6 +50,7 @@ import { enableStaticRendering } from 'mobx-react-lite'
 import Counter from './stores/Counter';
 import Todo from './stores/Todo';
 import Genres from './stores/Genres';
+import Authors from './stores/Authors';
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -59,6 +60,7 @@ export class Store {
     this.counter = new Counter();
     this.todo = new Todo();
     this.genres = new Genres();
+    this.authors = new Authors();
   }
 
   hydrate(data) {

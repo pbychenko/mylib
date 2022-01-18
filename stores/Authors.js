@@ -4,8 +4,8 @@ import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
-export default class Genres {
-  genres = []
+export default class Authors {
+  authors = []
   rootStore
 
   // constructor(rootStore) {
@@ -18,12 +18,14 @@ export default class Genres {
     // this.rootStore = rootStore
   }
 
-  addGenre = async (title) => {
-    const res = await axios.post('http://localhost:3333/api/genres', {
-      title,
+  addAuthor= async (authorData) => {
+    const { name, lastName } = authorData
+    const res = await axios.post('http://localhost:3333/api/authors', {
+      name,
+      lastName,
     });
     console.log(res.data)    
-    this.genres.push({id: res.data, title});
+    this.authors.push({id: res.data, name, last_name: lastName});
   }
 
   // addGenre() {
@@ -44,22 +46,22 @@ export default class Genres {
   //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
   // }
 
-  fetchGenres = async () => {
-    const genres = (await axios.get('http://localhost:3333/api/genres')).data;
-
+  fetchAuthors = async () => {
+    const authors = (await axios.get('http://localhost:3333/api/authors')).data;
+    console.log(authors)
 
     runInAction(() => {
-      this.genres = genres;      
+      this.authors = authors;      
     })
   }
 
   get genresData() {
-    return this.genres;
+    return this.authors;
   }
 
   hydrate = (data) => {
     if (!data) return;
 
-    this.genres = data;
+    this.authors = data;
   }
 }

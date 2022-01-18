@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
 
-const GenresList = observer(() => { //observer(({genres}) => {
+const GenresList = observer(() => {
   const { genres } = useStore();
   return (
     <>
@@ -18,7 +18,7 @@ const GenresList = observer(() => { //observer(({genres}) => {
           )
           )}          
       </Row>
-      <Button variant="primary" onClick={()=> genres.addGenre()}>Добавить жанр</Button>
+      <Button variant="primary" onClick={()=> genres.addGenre('tit')}>Добавить жанр</Button>
     </>    
   )
 })

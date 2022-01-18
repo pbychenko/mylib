@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import Navibar from '../components/Navibar';
-import GenresList from '../components/GenresList'; 
+import AuthorsList from '../components/AuthorsList'; 
 import { Container } from 'react-bootstrap';
 
 const Genres = () => {
@@ -19,7 +19,7 @@ const Genres = () => {
     <>      
       <Navibar />
       <Container className="mt-2">
-        <GenresList />
+        <AuthorsList />
       </Container>
     </>
   )
