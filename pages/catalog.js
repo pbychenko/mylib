@@ -8,14 +8,14 @@ import Image from 'next/image'
 
 
 
-const Catalog= ({ books }) => {
-  console.log(books);
+const Catalog= () => {
+  // console.log(books);
   return (
     <>      
       <Navibar />
       <Container className="mt-2">
         <FilterForm />
-        <BookList books={books}/>
+        <BookList />
       </Container>
     </>
   )
@@ -24,31 +24,31 @@ const Catalog= ({ books }) => {
 // export function getServerSideProps() {
 //   return { props: { initialState: { books, counter: 17, todo: [{id:1, title:'y'} ]} } }
 // }
-export function getServerSideProps() {
-  const books = [
-    {
-      id:1,
-      autor: 'Пелевин',
-      title: 'Амун Ра',
-      holder: 'Иван',
-      isTaken: true,
-    },
-    {
-      id:2,
-      autor: 'Акунин',
-      title: 'Рассказы',
-      holder: null,
-      isTaken: false,
-    },
-    {
-      id:1,
-      autor: 'Толстой',
-      title: 'Война и мир',
-      holder: 'Настя',
-      isTaken: true,
-    },
-  ];
-  return { props: { books } }
-}
+// export function getServerSideProps() {
+//   const books = [
+//     {
+//       id:1,
+//       autor: 'Пелевин',
+//       title: 'Амун Ра',
+//       holder: 'Иван',
+//       isTaken: true,
+//     },
+//     {
+//       id:2,
+//       autor: 'Акунин',
+//       title: 'Рассказы',
+//       holder: null,
+//       isTaken: false,
+//     },
+//     {
+//       id:1,
+//       autor: 'Толстой',
+//       title: 'Война и мир',
+//       holder: 'Настя',
+//       isTaken: true,
+//     },
+//   ];
+//   return { props: { books } }
+// }
 
 export default Catalog;

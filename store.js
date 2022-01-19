@@ -51,6 +51,7 @@ import Counter from './stores/Counter';
 import Todo from './stores/Todo';
 import Genres from './stores/Genres';
 import Authors from './stores/Authors';
+import Books from './stores/Books';
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -61,6 +62,7 @@ export class Store {
     this.todo = new Todo();
     this.genres = new Genres();
     this.authors = new Authors();
+    this.books = new Books();
   }
 
   hydrate(data) {
@@ -69,5 +71,6 @@ export class Store {
     this.counter.hydrate(data.counter);
     this.todo.hydrate(data.todo);
     this.genres.hydrate(data.genres);
+    this.books.hydrate(data.books);
   }
 }

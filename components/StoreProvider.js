@@ -54,6 +54,7 @@ function initializeStore(initialData = {counter: 2,
   // console.log(_store.genres)
   _store.genres.fetchGenres()
   _store.authors.fetchAuthors()
+  _store.books.fetchBooks()
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details
   if (initialData) {
