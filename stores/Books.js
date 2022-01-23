@@ -13,21 +13,24 @@ export default class Books {
   //   this.rootStore = rootStore
   // }
 
-  constructor() {
+  constructor(rootStore) {
     makeAutoObservable(this)
-    // this.rootStore = rootStore
+    this.rootStore = rootStore
   }
 
   addBook = async (bookData) => {
-    const { title, about, genreId, authorId } = bookData
+    const { title, about, genreId, authorIds } = bookData
     const res = await axios.post('http://localhost:3333/api/books', {
       title,
       about,
       genreId,
-      authorId
+      authorIds
     });
-    // console.log(res.data)    
-    this.books.push({ id: res.data, title, about });
+    // console.log(res.data)
+    // console.log('res.data', res.data)
+
+    
+    this.books.push({ id: res.data.id, title, about, authorIds });
   }
 
   // deleteItem(id) {
@@ -40,6 +43,7 @@ export default class Books {
 
   fetchBooks = async () => {
     const data = (await axios.get('http://localhost:3333/api/books')).data;
+    // console.log(data)
 
 
     runInAction(() => {

@@ -19,27 +19,6 @@ export function StoreProvider({ children, initialState: initialData }) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
-// const books = [
-//   {
-//     id:1,
-//     autor: 'Пелевин',
-//     title: 'Амун Ра',
-//     isTaken: false,
-//   },
-//   {
-//     id:2,
-//     autor: 'Акунин',
-//     title: 'Рассказы',
-//     isTaken: true,
-//   },
-//   {
-//     id:1,
-//     autor: 'Толстой',
-//     title: 'Война и мир',
-//     isTaken: false,
-//   },
-// ];
-
 // function initializeStore(initialData = {counter: 2,
 //   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
 //   genres: [ { id:1, title:'c'}, { id:2, title:'d'}],
@@ -49,7 +28,7 @@ function initializeStore(initialData = {counter: 2,
   genres: [], authors: []}) {
     // console.log(initialData.genres)
   // function initializeStore(initialData = null) {
-  console.log('test')
+  // console.log('test')
   const _store = store ?? new Store()
   // console.log(_store.genres)
   _store.genres.fetchGenres()

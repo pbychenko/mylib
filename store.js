@@ -60,9 +60,9 @@ export class Store {
     makeAutoObservable(this)
     this.counter = new Counter();
     this.todo = new Todo();
-    this.genres = new Genres();
-    this.authors = new Authors();
-    this.books = new Books();
+    this.genres = new Genres(this);
+    this.authors = new Authors(this);
+    this.books = new Books(this);
   }
 
   hydrate(data) {

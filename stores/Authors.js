@@ -13,9 +13,9 @@ export default class Authors {
   //   this.rootStore = rootStore
   // }
 
-  constructor() {
+  constructor(rootStore) {
     makeAutoObservable(this)
-    // this.rootStore = rootStore
+    this.rootStore = rootStore
   }
 
   addAuthor= async (authorData) => {
@@ -38,7 +38,7 @@ export default class Authors {
 
   fetchAuthors = async () => {
     const authors = (await axios.get('http://localhost:3333/api/authors')).data;
-    console.log(authors)
+    // console.log(authors)
 
     runInAction(() => {
       this.authors = authors;      

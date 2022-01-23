@@ -3,18 +3,7 @@ import Navibar from '../components/Navibar';
 import AuthorsList from '../components/AuthorsList'; 
 import { Container } from 'react-bootstrap';
 
-const Genres = () => {
-// useEffect(() => {
-//   genres.fetchGenres()
-//     // store.start()
-
-//     // stop the clock when the component unmounts
-//     // return () => {
-//     //   store.stop()
-//     // }
-    
-//   }, [genres])  
-
+const Authors = () => {
   return (
     <>      
       <Navibar />
@@ -37,4 +26,4 @@ const Genres = () => {
 //   return { props: { initialState: { counter: 17, todo: [{id:1, title:'y'} ], genres: [{id:1, title:'y'}]} } }
 // }
 
-export default Genres;
+export default Authors;

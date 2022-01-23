@@ -13,9 +13,9 @@ export default class Genres {
   //   this.rootStore = rootStore
   // }
 
-  constructor() {
+  constructor(rootStore) {
     makeAutoObservable(this)
-    // this.rootStore = rootStore
+    this.rootStore = rootStore
   }
 
   addGenre = async (title) => {

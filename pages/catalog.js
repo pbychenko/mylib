@@ -9,7 +9,6 @@ import Image from 'next/image'
 
 
 const Catalog= () => {
-  // console.log(books);
   return (
     <>      
       <Navibar />
@@ -23,32 +22,6 @@ const Catalog= () => {
 
 // export function getServerSideProps() {
 //   return { props: { initialState: { books, counter: 17, todo: [{id:1, title:'y'} ]} } }
-// }
-// export function getServerSideProps() {
-//   const books = [
-//     {
-//       id:1,
-//       autor: 'Пелевин',
-//       title: 'Амун Ра',
-//       holder: 'Иван',
-//       isTaken: true,
-//     },
-//     {
-//       id:2,
-//       autor: 'Акунин',
-//       title: 'Рассказы',
-//       holder: null,
-//       isTaken: false,
-//     },
-//     {
-//       id:1,
-//       autor: 'Толстой',
-//       title: 'Война и мир',
-//       holder: 'Настя',
-//       isTaken: true,
-//     },
-//   ];
-//   return { props: { books } }
 // }
 
 export default Catalog;

@@ -5,13 +5,14 @@ import { Col, Button, Row, Card } from 'react-bootstrap';
 import Image from 'next/image'
 
 const BookList = observer(() => {
-  const { books } = useStore();
+  const { books, authors } = useStore();
+  
   return (
     <>
     <Row>     
       {books.books.map((book) => 
-          (<Col md={3}>
-          <Card style={{ width: '18rem' }}>
+          (<Col key={book.id} md={3}>
+          <Card style={{ width: '18rem' }} >
               <Image
                 src="/images/test.jpg" 
                 height={300} 
@@ -21,6 +22,11 @@ const BookList = observer(() => {
               <Card.Body> 
               <Card.Title>{book.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{book.about}</Card.Subtitle>
+              {authors.authors.filter(author => (book.authorIds.includes(author.id)))
+              .map(author => (              
+                <Card.Subtitle className="mb-2 text-muted" key={author.id}>{author.name} {author.last_name}</Card.Subtitle>
+              ))}
+              
               {/* {book.isTaken ? null: (<Button variant="primary">Взять</Button>)}
               {book.isTaken ? (<Card.Text> Кто взял: {book.holder}  </Card.Text>) : null} */}
               </Card.Body>
@@ -29,10 +35,10 @@ const BookList = observer(() => {
       )}
     </Row>
     <Button variant="primary" onClick={()=> books.addBook({
-      title: 'Мертвые души',
+      title: 'Мертвые туши',
       about: 'о коррупции',
       genreId: 2,
-      authorId: 1,
+      authorIds: [13],
       })}>Добавить книгу</Button>
     </>         
   )
