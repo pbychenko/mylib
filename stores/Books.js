@@ -41,10 +41,9 @@ export default class Books {
   //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
   // }
 
-  fetchBooks = async () => {
-    const data = (await axios.get('http://localhost:3333/api/books')).data;
+  fetchBooks = async (authorId, genreId) => {
+    const data = (await axios.get(`http://localhost:3333/api/books?authorId=${authorId}&genreId=${genreId}`)).data;
     // console.log(data)
-
 
     runInAction(() => {
       this.books = data;      
