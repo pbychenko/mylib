@@ -8,11 +8,6 @@ export default class Authors {
   authors = []
   rootStore
 
-  // constructor(rootStore) {
-  //   makeAutoObservable(this, { rootStore: false })
-  //   this.rootStore = rootStore
-  // }
-
   constructor(rootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
@@ -28,14 +23,6 @@ export default class Authors {
     this.authors.push({id: res.data, name, last_name: lastName});
   }
 
-  // deleteItem(id) {
-  //   this.todos = this.todos.filter(el => el.id !== id);
-  // }
-
-  // changeItem(id) {
-  //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
-  // }
-
   fetchAuthors = async () => {
     const authors = (await axios.get('http://localhost:3333/api/authors')).data;
     // console.log(authors)
@@ -45,7 +32,7 @@ export default class Authors {
     })
   }
 
-  get genresData() {
+  get authorsData() {
     return this.authors;
   }
 
