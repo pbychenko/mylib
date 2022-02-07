@@ -19,7 +19,7 @@ export default class UserStore {
   }
   
   setCurrentUser(user) {
-      this.currentUser = user
+    this.currentUser = user
   }
 
   get isAuth() {
@@ -27,7 +27,7 @@ export default class UserStore {
   }
 
   get currentUser() {
-      return this.currentUser
+    return this.currentUser
   }
 
   // addAuthor= async (userData) => {

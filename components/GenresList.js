@@ -1,9 +1,15 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
+import cookies from 'js-cookie';
 
 const GenresList = observer(() => {
-  const { genres } = useStore();
+  const { genres, userStore } = useStore();
+  const token = cookies.get('token');
+  if (token) {
+    userStore.setIsAuth(true);
+  }
+
   return (
     <>
       <Row>     
@@ -18,7 +24,8 @@ const GenresList = observer(() => {
           )
           )}          
       </Row>
-      <Button variant="primary" onClick={()=> genres.addGenre('tit')}>Добавить жанр</Button>
+      {userStore.isAuth ? (<Button variant="primary" onClick={()=> genres.addGenre('tit', token)}>Добавить жанр</Button>) : null }
+      
     </>    
   )
 })

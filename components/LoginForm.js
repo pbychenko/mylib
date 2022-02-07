@@ -10,7 +10,9 @@ import { useRouter } from 'next/router'
 import { useFormik } from 'formik';
 
 const LoginForm = () => {
-  const router = useRouter()
+  const { userStore } = useStore();
+  const router = useRouter();
+
   const validate = (values) => {
     const errors = {};
          if (!values.email) {
@@ -34,11 +36,8 @@ const LoginForm = () => {
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      console.log('here')
       const url = 'http://127.0.0.1:3333/api/login';
       const data = {  ...values  };
-      
-      console.log(values)
       try {
         const resp = await axios.post(url, data);
         console.log(resp.data)
@@ -47,14 +46,15 @@ const LoginForm = () => {
         const { token } = resp.data;
         // if (!cookies.get('token')) {
           cookies.set('token', token);
+          userStore.setIsAuth(true);
           
-          router.push('/');
+          router.push('/genres');
         // }
       } catch (er) {
         setSubmitting(true);
-        setFieldError('email', 'ошибка сети' );
+        setFieldError('email', 'невалидные данные' );
         // throw er;
-        console.log(er)
+        console.log(er.message)
       }
     },
   });

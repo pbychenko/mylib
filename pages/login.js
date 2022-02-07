@@ -7,6 +7,7 @@ const Login = () => {
   return (
     <>      
       <Navibar />
+      <h2>Авторизация</h2>
       <Container className="mt-2">
         <LoginForm />
       </Container>
