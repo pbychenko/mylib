@@ -46,7 +46,7 @@ const LoginForm = () => {
         const { token } = resp.data;
         // if (!cookies.get('token')) {
           cookies.set('token', token);
-          userStore.setIsAuth(true);
+          // userStore.setIsAuth(true);
           
           router.push('/genres');
         // }

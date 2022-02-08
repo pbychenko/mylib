@@ -2,6 +2,9 @@ import { Button } from 'react-bootstrap';
 import Navibar from '../components/Navibar';
 import GenresList from '../components/GenresList'; 
 import { Container } from 'react-bootstrap';
+// import { observer } from 'mobx-react-lite'
+// import { useStore } from '../components/StoreProvider'
+import cookies from 'js-cookie';
 
 const Genres = () => {
 // useEffect(() => {
@@ -37,4 +40,16 @@ const Genres = () => {
 //   return { props: { initialState: { counter: 17, todo: [{id:1, title:'y'} ], genres: [{id:1, title:'y'}]} } }
 // }
 
+// export const getServerSideProps = async () => {
+//   const token = cookies.get('token');
+//   console.log('ss', token)
+//   if (token) {
+//     const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${token}` }})).data;
+//     // console.log(user);
+//     if (user) {
+//       return { props: { user } };
+//     }
+//   }
+//   return { props: { user: null } };
+// }
 export default Genres;
