@@ -7,8 +7,8 @@ import { useFormik } from 'formik';
 import { useStore } from '../StoreProvider'
 
 
-const AddGenreModal = ({ token }) => {
-  const { modalsStore, genresStore } = useStore();
+const AddAuthorModal = ({ token }) => {
+  const { modalsStore, authorsStore } = useStore();
 
   const handleHideModal = () => {
     modalsStore.hideModal();
@@ -16,15 +16,20 @@ const AddGenreModal = ({ token }) => {
 
   const validate = (values) => {
     const errors = {};
-    if (!values.title) {
-      errors.title = 'Required';
+    if (!values.name) {
+      errors.name = 'Required';
+    }
+
+    if (!values.lastName) {
+      errors.lastName = 'Required';
     }
 
     return errors;
   };
   const formik = useFormik({
     initialValues: {
-      title: '',
+      name: '',
+      lastName: ''
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
@@ -32,7 +37,7 @@ const AddGenreModal = ({ token }) => {
       const data = {  ...values  };
       console.log(data)
       try {
-        genresStore.addGenre(data, token)
+        authorsStore.addAuthor(data, token)
         setSubmitting(false);
         modalsStore.hideModal();
         resetForm();
@@ -44,7 +49,7 @@ const AddGenreModal = ({ token }) => {
     },
   });
   // const inputEl = useRef(null);
-  const textBorderColorStyle = formik.errors.title ? { borderColor: 'red' } : null;
+  const textBorderColorStyle = formik.errors.name ? { borderColor: 'red' } : null;
 
   return (
     <Modal
@@ -65,14 +70,26 @@ const AddGenreModal = ({ token }) => {
               <Form.Group  className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Жанр"
+                  placeholder="Имя"
                   // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...formik.getFieldProps('title')}
+                  {...formik.getFieldProps('name')}
+                  // ref={inputEl}
+                  style={textBorderColorStyle}
+                  className="mb-3"
+                />
+                <Form.Control
+                  type="text"
+                  placeholder="Фамилия"
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...formik.getFieldProps('lastName')}
                   // ref={inputEl}
                   style={textBorderColorStyle}
                 />
-                {formik.touched.title && formik.errors.title ? (
-                  <div>{formik.errors.title}</div>
+                {formik.touched.name && formik.errors.name ? (
+                  <div>{formik.errors.name}</div>
+                ) : null}
+                {formik.touched.lastName && formik.errors.lastName ? (
+                  <div>{formik.errors.lastName}</div>
                 ) : null}
               </Form.Group>
               <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Добавить</Button>
@@ -84,4 +101,4 @@ const AddGenreModal = ({ token }) => {
   );
 };
 
-export default AddGenreModal;
+export default AddAuthorModal;

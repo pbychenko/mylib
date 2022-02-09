@@ -26,8 +26,8 @@ export function StoreProvider({ children, initialState: initialData }) {
 function initializeStore(initialData = {
   counter: 2,
   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
-  genres: [],
-  authors: [],
+  genresStore: [],
+  authorsStore: [],
   userStore: {
     users: [],
     isAuth: false,
@@ -41,8 +41,8 @@ function initializeStore(initialData = {
   // console.log('test')
   const _store = store ?? new Store()
   // console.log(_store.genres)
-  _store.genres.fetchGenres()
-  _store.authors.fetchAuthors()
+  _store.genresStore.fetchGenres()
+  _store.authorsStore.fetchAuthors()
   _store.books.fetchBooks()
   _store.userStore.fetchUsers()
   // If your page has Next.js data fetching methods that use a Mobx store, it will

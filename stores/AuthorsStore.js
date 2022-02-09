@@ -4,7 +4,7 @@ import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
-export default class Authors {
+export default class AuthorsStore {
   authors = []
   rootStore
 

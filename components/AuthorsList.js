@@ -1,14 +1,48 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
+import getModal from './modals/index';
+import cookies from 'js-cookie';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
-const AuthorsList = observer(() => { //observer(({genres}) => {
-  const { authors } = useStore();
-  // console.log(authors.authors);
+const fetchUser = async (t, store) => {
+  try {
+    const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
+    console.log('us', user)
+    store.setIsAuth(true);
+    return user;
+  } catch (e) {
+    console.log('asss', e);
+    store.setIsAuth(false);
+    return '401';
+  }
+}
+
+const AuthorsList = observer(() => {
+  const { authorsStore, userStore, modalsStore } = useStore();
+  const token = cookies.get('token');
+
+  useEffect(() => {    
+    if (token) {
+      console.log('before')
+      const user = fetchUser(token, userStore)
+    }
+  }, [])
+  console.log('useыы', userStore.isAuth)
+
+  const renderModal = () => {
+    if (modalsStore.modalName === '') {
+      return null;
+    }
+
+    const ModalComponent = getModal(modalsStore.modalName);
+    return (<ModalComponent token={token} />);
+  };
   return (
     <>
       <Row>     
-          {authors.authors.map((author) => 
+          {authorsStore.authors.map((author) => 
             (<Col key={author.id} md={3}>
               <Card style={{ width: '18rem' }}>
                 <Card.Body> 
@@ -20,7 +54,8 @@ const AuthorsList = observer(() => { //observer(({genres}) => {
           )
           )}          
       </Row>
-      <Button variant="primary" onClick={()=> authors.addAuthor({name: 'Ник', lastName: 'Перумов'})}>Добавить жанр</Button>
+      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addAuthorModal')}>Добавить автора</Button>) : null }
+      {renderModal()} 
     </>    
   )
 })

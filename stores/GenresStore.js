@@ -4,7 +4,7 @@ import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
-export default class Genres {
+export default class GenresStore {
   genres = []
   rootStore
 
@@ -20,26 +20,13 @@ export default class Genres {
 
   addGenre = async (genreData, token) => {
     const res = await axios.post('http://localhost:3333/api/genres',
-
-    genreData,
-    { 
-      headers: { Authorization: `Bearer ${token}` }
-    },
+      genreData,
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     console.log('in methods', res.data)
     // console.log('in methods', title)  
     this.genres.push({id: res.data, title: genreData.title});
   }
-
-  // addGenre() {
-  //   // const res = await axios.post('http://localhost:3333/api/genres', {
-  //   //   title: 'test',
-  //   // });
-  //   console.log('in add')
-  //   // console.log(this.genres)   
-  //   this.genres.push({id: 142, title: 'god'});
-  //   // console.log(this.genres) 
-  // }
 
   // deleteItem(id) {
   //   this.todos = this.todos.filter(el => el.id !== id);

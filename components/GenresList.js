@@ -3,7 +3,7 @@ import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import getModal from './modals/index';
 
 const fetchUser = async (t, store) => {
@@ -20,11 +20,10 @@ const fetchUser = async (t, store) => {
 }
 
 const GenresList = observer(() => {
-  const { genres, userStore, modalsStore } = useStore();
+  const { genresStore, userStore, modalsStore } = useStore();
   const token = cookies.get('token');
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     if (token) {
       console.log('before')
       const user = fetchUser(token, userStore)
@@ -44,7 +43,7 @@ const GenresList = observer(() => {
   return (
     <>
       <Row>     
-          {genres.genres.map((genre) => 
+          {genresStore.genres.map((genre) => 
             (<Col key={genre.id} md={3}>
               <Card style={{ width: '18rem' }}>
                 <Card.Body> 
@@ -55,7 +54,6 @@ const GenresList = observer(() => {
           )
           )}          
       </Row>
-      {/* {userStore.isAuth ? (<Button variant="primary" onClick={()=> genres.addGenre('tit', token)}>Добавить жанр</Button>) : null } */}
       {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addGenreModal')}>Добавить жанр</Button>) : null }
       {renderModal()}      
     </>    
