@@ -18,16 +18,17 @@ export default class Genres {
     this.rootStore = rootStore
   }
 
-  addGenre = async (title, token) => {
+  addGenre = async (genreData, token) => {
     const res = await axios.post('http://localhost:3333/api/genres',
 
-    { title },
+    genreData,
     { 
       headers: { Authorization: `Bearer ${token}` }
     },
     );
-    console.log(res.data)    
-    this.genres.push({id: res.data, title});
+    console.log('in methods', res.data)
+    // console.log('in methods', title)  
+    this.genres.push({id: res.data, title: genreData.title});
   }
 
   // addGenre() {

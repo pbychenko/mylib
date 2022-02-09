@@ -53,6 +53,7 @@ import Genres from './stores/Genres';
 import Authors from './stores/Authors';
 import Books from './stores/Books';
 import UserStore from './stores/UserStore';
+import ModalsStore from './stores/ModalsStore';
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -65,6 +66,7 @@ export class Store {
     this.authors = new Authors(this);
     this.books = new Books(this);
     this.userStore = new UserStore(this)
+    this.modalsStore = new ModalsStore(this)
   }
 
   hydrate(data) {

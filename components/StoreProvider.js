@@ -33,6 +33,7 @@ function initializeStore(initialData = {
     isAuth: false,
     currentUser: {},
   },
+  modalsStore: '',
 })
  {
     // console.log(initialData.genres)

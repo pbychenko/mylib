@@ -4,6 +4,7 @@ import { Col, Button, Row, Card } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import getModal from './modals/index';
 
 const fetchUser = async (t, store) => {
   try {
@@ -19,21 +20,26 @@ const fetchUser = async (t, store) => {
 }
 
 const GenresList = observer(() => {
-  const { genres, userStore } = useStore();
-  // const token = cookies.get('token');
-  // if (token) {
-  //   console.log('before')
-  //   const user = fetchUser(token, userStore)
-  // }
+  const { genres, userStore, modalsStore } = useStore();
+  const token = cookies.get('token');
 
   useEffect(() => {
-    const token = cookies.get('token');
+    
     if (token) {
       console.log('before')
       const user = fetchUser(token, userStore)
     }
   }, [])
-  console.log('use', userStore.isAuth)
+  console.log('useыы', userStore.isAuth)
+
+  const renderModal = () => {
+    if (modalsStore.modalName === '') {
+      return null;
+    }
+
+    const ModalComponent = getModal(modalsStore.modalName);
+    return (<ModalComponent token={token} />);
+  };
 
   return (
     <>
@@ -49,8 +55,9 @@ const GenresList = observer(() => {
           )
           )}          
       </Row>
-      {userStore.isAuth ? (<Button variant="primary" onClick={()=> genres.addGenre('tit', token)}>Добавить жанр</Button>) : null }
-      
+      {/* {userStore.isAuth ? (<Button variant="primary" onClick={()=> genres.addGenre('tit', token)}>Добавить жанр</Button>) : null } */}
+      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addGenreModal')}>Добавить жанр</Button>) : null }
+      {renderModal()}      
     </>    
   )
 })
