@@ -4,7 +4,7 @@ import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
-export default class Books {
+export default class BooksStore {
   books = []
   rootStore
 
@@ -49,10 +49,6 @@ export default class Books {
       this.books = data;      
     })
   }
-
-  // get genresData() {
-  //   return this.genres;
-  // }
 
   hydrate = (data) => {
     if (!data) return;

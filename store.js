@@ -51,7 +51,7 @@ import Counter from './stores/Counter';
 import Todo from './stores/Todo';
 import GenresStore from './stores/GenresStore';
 import AuthorsStore from './stores/AuthorsStore';
-import Books from './stores/Books';
+import BooksStore from './stores/BooksStore';
 import UserStore from './stores/UserStore';
 import ModalsStore from './stores/ModalsStore';
 
@@ -64,7 +64,7 @@ export class Store {
     this.todo = new Todo();
     this.genresStore = new GenresStore(this);
     this.authorsStore = new AuthorsStore(this);
-    this.books = new Books(this);
+    this.booksStore = new BooksStore(this);
     this.userStore = new UserStore(this)
     this.modalsStore = new ModalsStore(this)
   }
@@ -76,6 +76,6 @@ export class Store {
     this.todo.hydrate(data.todo);
     this.genresStore.hydrate(data.genresStore);
     this.authorsStore.hydrate(data.authorsStore);
-    this.books.hydrate(data.books);
+    this.booksStore.hydrate(data.books);
   }
 }

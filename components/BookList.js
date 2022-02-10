@@ -5,12 +5,12 @@ import { Col, Button, Row, Card } from 'react-bootstrap';
 import Image from 'next/image'
 
 const BookList = observer(() => {
-  const { books, authors } = useStore();
+  const { booksStore, authorsStore } = useStore();
   
   return (
     <>
     <Row>     
-      {books.books.map((book) => 
+      {booksStore.books.map((book) => 
           (<Col key={book.id} md={3}>
           <Card style={{ width: '18rem' }} >
               <Image
@@ -22,7 +22,7 @@ const BookList = observer(() => {
               <Card.Body> 
               <Card.Title>{book.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{book.about}</Card.Subtitle>
-              {authors.authors.filter(author => (book.authorIds.includes(author.id)))
+              {authorsStore.authors.filter(author => (book.authorIds.includes(author.id)))
               .map(author => (              
                 <Card.Subtitle className="mb-2 text-muted" key={author.id}>{author.name} {author.last_name}</Card.Subtitle>
               ))}
@@ -34,7 +34,7 @@ const BookList = observer(() => {
       </Col>)
       )}
     </Row>
-    <Button variant="primary" onClick={()=> books.addBook({
+    <Button variant="primary" onClick={()=> booksStore.addBook({
       title: 'Мертвые туши',
       about: 'о коррупции',
       genreId: 2,

@@ -4,12 +4,12 @@ import { Col, Button, Row, Form, Card } from 'react-bootstrap';
 import axios from 'axios';
 
 const FilterForm = observer(() => {
-  const { authors, books } = useStore();
+  const { authorsStore, booksStore } = useStore();
   // console.log('d',authors)
   const submitForm = (e) => {
     e.preventDefault()
     console.log(e.target.author.value)
-    books.fetchBooks(e.target.author.value)
+    booksStore.fetchBooks(e.target.author.value)
 
     // const res = await fetch('/api/register', {
     //   body: JSON.stringify({
@@ -34,7 +34,7 @@ const FilterForm = observer(() => {
                 {/* <Form.Control /> */}
                 <Form.Select name="author">
                   <option value='all' selected>Выберите автора</option>
-                  {authors.authors.map((author) => (
+                  {authorsStore.authors.map((author) => (
                     <option value={author.id}>{author.name} {author.last_name}</option>
                   ))}                    
                 </Form.Select>
