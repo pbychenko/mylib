@@ -1,64 +1,67 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Form, Card } from 'react-bootstrap';
+import { useFormik } from 'formik';
 import axios from 'axios';
 
 const FilterForm = observer(() => {
-  const { authorsStore, booksStore } = useStore();
-  // console.log('d',authors)
-  const submitForm = (e) => {
-    e.preventDefault()
-    console.log(e.target.author.value)
-    booksStore.fetchBooks(e.target.author.value)
+  const { authorsStore, booksStore, genresStore } = useStore();
 
-    // const res = await fetch('/api/register', {
-    //   body: JSON.stringify({
-    //     name: event.target.name.value
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   method: 'POST'
-    // })
-
-    // const result = await res.json()
-    // result.user => 'Ada Lovelace'
-  }
-  
+  const formik = useFormik({
+    initialValues: {
+      authorId: '',
+      genreId: '',
+    },
+    // validate,
+    onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
+      // const url = routes.channelsPath();
+      const { authorId, genreId} = values;
+      // console.log(data)
+      try {
+  //   console.log(e.target.author.value)
+        booksStore.fetchBooks(authorId, genreId)
+        setSubmitting(false);
+        // resetForm();
+      } catch (er) {
+        setSubmitting(true);
+        setFieldError('name', 'networkError');
+        throw er;
+      }
+    },
+  });  
 
   return (
-    <Form onSubmit={submitForm}>
+    // <Form onSubmit={submitForm}>
+    <Form onSubmit={formik.handleSubmit}>
         <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridCity">
+            <Form.Group as={Col} controlId="formAuthor">
                 <Form.Label>Автор</Form.Label>
-                {/* <Form.Control /> */}
-                <Form.Select name="author">
-                  <option value='all' selected>Выберите автора</option>
+                <Form.Select
+                 {...formik.getFieldProps('authorId')}
+                 >
+                  {/* <option value='all' selected>Выберите автора</option> */}
+                  <option value="">Выберите автора</option>
                   {authorsStore.authors.map((author) => (
-                    <option value={author.id}>{author.name} {author.last_name}</option>
+                    <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
                   ))}                    
                 </Form.Select>
             </Form.Group>
 
-            {/* <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col} controlId="formGenre">
                 <Form.Label>Жанр</Form.Label>
-                <Form.Select defaultValue="Choose...">
-                  {authors.authors.map((author) => {
-                    <option>{author.name}</option>
-                  })}
+                <Form.Select
+                 {...formik.getFieldProps('genreId')}
+                 >
+                  {/* <option value='all' selected>Выберите жанр</option> */}
+                  <option value="">Выберите жанр</option>
+                  {genresStore.genres.map((genre) => (
+                    <option key={genre.id} value={genre.id}>{genre.title}</option>
+                  ))}                    
                 </Form.Select>
-                
-            </Form.Group> */}
+            </Form.Group>
         </Row>
-
-        {/* <Form.Group className="mb-3" id="formGridCheckbox">
-            <Form.Check type="checkbox" label="Доступны" />
-        </Form.Group> */}
-
-        <Button variant="primary" type="submit">
-            Submit
-        </Button>
-</Form>
+        <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Показать</Button>
+  </Form>
   )
 })
 

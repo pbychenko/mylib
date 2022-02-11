@@ -10,7 +10,7 @@ const Catalog= () => {
     <>      
       <Navibar />
       <Container className="mt-2">
-        {/* <FilterForm /> */}
+        <FilterForm />
         <BookList />
       </Container>
     </>

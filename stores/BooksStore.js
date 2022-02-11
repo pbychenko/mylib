@@ -26,11 +26,21 @@ export default class BooksStore {
       genreId,
       authorIds
     });
+    console.log(authorIds)
     // console.log(res.data)
     // console.log('res.data', res.data)
 
+    this.books.push({ id: res.data.id, title, about, authorIds }); 
+
+    // runInAction(() => {
+    //   this.books.push({ id: res.data.id, title, about, authorIds }); 
+    // })
+
+    console.log('hui', this.books)
+
     
-    this.books.push({ id: res.data.id, title, about, authorIds });
+    // this.books.push({ id: res.data.id, title, about, authorIds });
+    // console.log(this.books)
   }
 
   // deleteItem(id) {
@@ -41,7 +51,9 @@ export default class BooksStore {
   //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
   // }
 
-  fetchBooks = async (authorId, genreId) => {
+  fetchBooks = async (authorId='', genreId='') => {
+    console.log('authorId', authorId)
+    console.log('genreId', genreId)
     const data = (await axios.get(`http://localhost:3333/api/books?authorId=${authorId}&genreId=${genreId}`)).data;
     // console.log(data)
 
