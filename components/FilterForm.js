@@ -2,7 +2,6 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Form, Card } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import axios from 'axios';
 
 const FilterForm = observer(() => {
   const { authorsStore, booksStore, genresStore } = useStore();
