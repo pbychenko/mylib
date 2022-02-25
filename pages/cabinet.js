@@ -15,6 +15,17 @@ import React, { useEffect } from 'react';
   
 
 const Cabinet= () => {
+  const token = cookies.get('token');
+
+  // useEffect(() => {    
+  //   if (!token) {
+
+  //   }
+  //   // if (token) {
+  //   //   // console.log('before')
+  //   //   const user = fetchUser(token, userStore)
+  //   // }
+  // }, [])
   return (
     <>      
       <Navibar />

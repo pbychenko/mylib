@@ -4,7 +4,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import cookies from 'js-cookie';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useRouter } from 'next/router'
 
 import { useFormik } from 'formik';
@@ -22,10 +22,29 @@ const fetchUser = async (t, store) => {
   }
 }
 
-const user = {name: 'Павел', email: 'cbpa@technodom.kz'}
+// const user = {name: 'Павел', email: 'cbpa@technodom.kz'}
 
 const PersonalInfoForm = () => {
+  const token = cookies.get('token');
   const { userStore } = useStore();
+  const router = useRouter();
+
+  let user;
+
+  useEffect(() => {    
+    if (token) {
+      // console.log('before')
+       user = fetchUser(token, userStore)
+    }
+  }, [])
+  console.log('user', user)
+
+  if (!user) {
+    
+    router.push('/');
+    return null;
+
+  }
 
   const validate = (values) => {
     const errors = {};
@@ -78,31 +97,6 @@ const PersonalInfoForm = () => {
   
 
   return (
-    // <Form onSubmit={formik.handleSubmit}>
-    //   <Form.Group>
-    //     <Form.Control
-    //       type="email"
-    //       placeholder="email"
-    //       {...formik.getFieldProps('email')}
-    //       style={textBorderColorStyle}
-    //       className="mb-3"
-    //     />
-    //     <Form.Control
-    //       className="mb-3"
-    //       type="password"
-    //       placeholder="password"
-    //       {...formik.getFieldProps('password')}
-    //       style={textBorderColorStyle}
-    //     />
-    //     {formik.touched.email && formik.errors.email ? (
-    //       <div>{formik.errors.email}</div>
-    //     ) : null}
-    //     {formik.touched.password && formik.errors.password ? (
-    //       <div>{formik.errors.password}</div>
-    //     ) : null} 
-    //   </Form.Group>
-    //   <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Login</Button>
-    // </Form>
     <Form onSubmit={formik.handleSubmit}>
       <Row className="mb-3">
           <Form.Group as={Col}>
