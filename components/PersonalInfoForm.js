@@ -9,18 +9,7 @@ import { useRouter } from 'next/router'
 
 import { useFormik } from 'formik';
 
-const fetchUser = async (t, store) => {
-  try {
-    const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
-    // console.log('us', user)
-    store.setIsAuth(true);
-    return user;
-  } catch (e) {
-    // console.log('asss', e);
-    store.setIsAuth(false);
-    return '401';
-  }
-}
+
 
 // const user = {name: 'Павел', email: 'cbpa@technodom.kz'}
 
@@ -39,11 +28,9 @@ const PersonalInfoForm = () => {
   }, [])
   console.log('user', user)
 
-  if (!user) {
-    
-    router.push('/');
+  if (!user) {    
+    // router.push('/genres');
     return null;
-
   }
 
   const validate = (values) => {
