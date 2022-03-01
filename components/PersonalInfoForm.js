@@ -4,34 +4,58 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import cookies from 'js-cookie';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
 import { useFormik } from 'formik';
 
-
+const fetchUser = async (t, store) => {
+  try {
+    const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
+    console.log('asss', user);
+    store.setIsAuth(true);
+    store.setCurrentUser(user);
+    return user;
+  } catch (e) {
+    console.log('asss', e);
+    store.setIsAuth(false);
+    return '401';
+  }
+}
 
 // const user = {name: 'Павел', email: 'cbpa@technodom.kz'}
 
 const PersonalInfoForm = () => {
-  const token = cookies.get('token');
-  const { userStore } = useStore();
   const router = useRouter();
+  const { userStore } = useStore();
+  const token = cookies.get('token');
+  // const [isLoading, setLoading] = useState(false)
+  // let user
+  // const [user, setUser] = useState(null)
 
-  let user;
-
-  useEffect(() => {    
+  useEffect(() => {
+    // setLoading(true)
+    if (!token) {
+      router.push('/');
+    }  
     if (token) {
       // console.log('before')
-       user = fetchUser(token, userStore)
-    }
-  }, [])
-  console.log('user', user)
+      const user = fetchUser(token, userStore).then(user)
 
-  if (!user) {    
-    // router.push('/genres');
-    return null;
+      if (!user) {
+        router.push('/');
+      }
+    }    
+    
+  }, []); 
+  // console.log('user', user)
+  // if (isLoading) return <p>Loading...</p>
+  const user = userStore.currentUser
+  console.log('user', user)
+  if (!user) {
+    router.push('/');
   }
+
 
   const validate = (values) => {
     const errors = {};
@@ -129,6 +153,7 @@ const PersonalInfoForm = () => {
       <Button variant="primary" type="submit" disabled={formik.isSubmitting}>Изменить</Button>
     </Form>
   );
+  // return 'test'
 };
 
 export default PersonalInfoForm;

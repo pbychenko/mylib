@@ -6,7 +6,7 @@ enableStaticRendering(typeof window === 'undefined')
 
 export default class UserStore {
   isAuth = false
-  currentUser = {}
+  currentUser = null
   users = []
 
   constructor(rootStore) {
@@ -19,7 +19,7 @@ export default class UserStore {
   }
   
   setCurrentUser(user) {
-    this.currentUser = user
+    this.currentUser = { ...user}
   }
 
   get isAuth() {

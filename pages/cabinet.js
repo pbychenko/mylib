@@ -10,45 +10,48 @@ import { useRouter } from 'next/router';
 import { useStore } from '../components/StoreProvider'
 import axios from 'axios';
 
-const fetchUser = async (t, store) => {
-  try {
-    const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
-    store.setIsAuth(true);
-    return user;
-  } catch (e) {
-    console.log('asss', e);
-    store.setIsAuth(false);
-    return '401';
-  }
-}
+// const fetchUser = async (t, store) => {
+//   try {
+//     const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
+//     console.log('asss', user);
+//     store.setIsAuth(true);
+//     store.setCurrentUser(user);
+//     return user;
+//   } catch (e) {
+//     console.log('asss', e);
+//     store.setIsAuth(false);
+//     return '401';
+//   }
+// }
 
 const Cabinet= () => {
-  const router = useRouter();
-  const { userStore } = useStore();
-  const token = cookies.get('token');
+  // const router = useRouter();
+  // const { userStore } = useStore();
+  // const token = cookies.get('token');
+  // let user
 
-  useEffect(() => {
-    if (!token) {
-      router.push('/');
-
-    }  
-    if (token) {
-      // console.log('before')
-      const user = fetchUser(token, userStore)
-      if (!user) {
-        router.push('/');
-      }
-    }    
+  // useEffect(async () => {
+  //   if (!token) {
+  //     router.push('/');
+  //   }  
+  //   if (token) {
+  //     // console.log('before')
+  //     user = await fetchUser(token, userStore)
+  //     if (!user) {
+  //       router.push('/');
+  //     }
+  //   }    
     
-  }, []);  
+  // }, []); 
+  // console.log(user)
 
   return (
     <>      
       <Navibar />
       <Container className="mt-2">
           <h2>Профиль</h2>
-          {/* <PersonalInfoForm /> */}
-          
+          {/* {user ? <PersonalInfoForm user={user}/> : null } */}
+          <PersonalInfoForm />
           {/* <h2>Взятые книги</h2> */}
           {/* <BookList books={books}/> */}
       </Container>
