@@ -9,7 +9,7 @@ import getModal from './modals/index';
 const fetchUser = async (t, store) => {
   try {
     const user = (await axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${t}` }})).data;
-    console.log('us', user)
+    // console.log('us', user)
     store.setIsAuth(true);
     return user;
   } catch (e) {
@@ -29,7 +29,7 @@ const GenresList = observer(() => {
       const user = fetchUser(token, userStore)
     }
   }, [])
-  console.log('useыы', userStore.isAuth)
+  // console.log('useыы', userStore.isAuth)
 
   const renderModal = () => {
     if (modalsStore.modalName === '') {
