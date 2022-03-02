@@ -1,5 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 // import Page from '../components/Page'
+import { observer } from 'mobx-react-lite'
 import Navibar from '../components/Navibar';
 import PersonalInfoForm from '../components/PersonalInfoForm';
 import { Container, Button, Form } from 'react-bootstrap';
@@ -24,12 +25,12 @@ import axios from 'axios';
 //   }
 // }
 
-const Cabinet= () => {
+const Cabinet = observer(() => {
   const router = useRouter();
-  // const { userStore } = useStore();
+  const { userStore } = useStore();
   const token = cookies.get('token');
   // let user
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(false)
 
   // useEffect(async () => {
@@ -61,14 +62,15 @@ const Cabinet= () => {
       axios.get('http://localhost:3333/api/profile', { headers: { Authorization: `Bearer ${token}` }})
         .then((res) => {
           // const user = { }
-          setUser(res.data)
+          // setUser(res.data)
+          userStore.setCurrentUser(res.data)
           setLoading(false)
         }).catch((e) => {
           console.log(e)
           router.push('/');
         });
     }   
-  }, [user]);
+  }, []);
 
   // useEffect(async () => {
   //   if (!token) {
@@ -83,20 +85,20 @@ const Cabinet= () => {
   //   }    
     
   // }, []);
-  console.log('test', user)
+  console.log('test', userStore.currentUser)
 
   return (
     <>      
       <Navibar />
       <Container className="mt-2">
           <h2>Профиль</h2>
-          {user ? <PersonalInfoForm user={user}/> : null }
+          {userStore.currentUser ? <PersonalInfoForm user={userStore.currentUser}/> : null }
           {/* <PersonalInfoForm user={user}/> */}
           {/* <h2>Взятые книги</h2> */}
           {/* <BookList books={books}/> */}
       </Container>
     </>
   )
-};
+});
 
 export default Cabinet;

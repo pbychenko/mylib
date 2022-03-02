@@ -23,9 +23,11 @@ import { useFormik } from 'formik';
 
 // const user = {name: 'Павел', email: 'cbpa@technodom.kz'}
 
-const PersonalInfoForm = ({user}) => {
+const PersonalInfoForm = observer(() => {
   // const router = useRouter();
-  // const { userStore } = useStore();
+  const { userStore } = useStore();
+  const user = userStore.currentUser;
+  // console.log('ss', { ...user})
   const token = cookies.get('token');
   // let user;
 
@@ -80,6 +82,7 @@ const PersonalInfoForm = ({user}) => {
       console.log('formdata',data)
       try {
         const resp = await axios.patch(url, data,  { headers: { Authorization: `Bearer ${token}` } });
+        userStore.setCurrentUser(resp.data)
         console.log(resp.data)
         setSubmitting(false);
         resetForm()
@@ -145,6 +148,6 @@ const PersonalInfoForm = ({user}) => {
       <Button variant="primary" type="submit" disabled={formik.isSubmitting}>Изменить</Button>
     </Form>
   );
-};
+});
 
 export default PersonalInfoForm;
