@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite'
 import Navibar from '../components/Navibar';
 import PersonalInfoForm from '../components/PersonalInfoForm';
+import BookList from '../components/BookList';
 import { Container, Button, Form } from 'react-bootstrap';
 import Image from 'next/image'
 import cookies from 'js-cookie';
@@ -92,9 +93,10 @@ const Cabinet = observer(() => {
       <Navibar />
       <Container className="mt-2">
           <h2>Профиль</h2>
-          {userStore.currentUser ? <PersonalInfoForm user={userStore.currentUser}/> : null }
+          {userStore.currentUser ? <PersonalInfoForm /> : null }
           {/* <PersonalInfoForm user={user}/> */}
           {/* <h2>Взятые книги</h2> */}
+          {userStore.currentUser ? <BookList /> : null }
           {/* <BookList books={books}/> */}
       </Container>
     </>

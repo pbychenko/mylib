@@ -26,7 +26,7 @@ import { useFormik } from 'formik';
 const PersonalInfoForm = observer(() => {
   // const router = useRouter();
   const { userStore } = useStore();
-  const user = userStore.currentUser;
+  // const user = userStore.currentUser;
   // console.log('ss', { ...user})
   const token = cookies.get('token');
   // let user;
@@ -64,20 +64,22 @@ const PersonalInfoForm = observer(() => {
       }
 
       if (!values.fullName) {
-      errors.fullName = 'Required';
+        errors.fullName = 'Required';
       }
 
       return errors;
   };
   const formik = useFormik({
     initialValues: {
-      email: user.email,
-      fullName: user.full_name,
+      // email: user.email,
+      // fullName: user.full_name,
+      email: userStore.currentUser.email,
+      fullName: userStore.currentUser.full_name,
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
       // console.log('here')
-      const url = `http://127.0.0.1:3333/api/users/${user.id}`;
+      const url = `http://127.0.0.1:3333/api/users/${userStore.currentUser.id}`;
       const data = {  ...values  };
       console.log('formdata',data)
       try {
@@ -85,7 +87,7 @@ const PersonalInfoForm = observer(() => {
         userStore.setCurrentUser(resp.data)
         console.log(resp.data)
         setSubmitting(false);
-        resetForm()
+        // resetForm()
         // const { token } = resp.data;
         // // if (!cookies.get('token')) {
         //   cookies.set('token', token);
@@ -96,6 +98,7 @@ const PersonalInfoForm = observer(() => {
       } catch (er) {
         setSubmitting(true);
         setFieldError('email', 'невалидные данные' );
+        setFieldError('fullName', 'невалидные данные' );
         // throw er;
         console.log(er.message)
       }
@@ -140,8 +143,8 @@ const PersonalInfoForm = observer(() => {
           {formik.touched.email && formik.errors.email ? (
           <div>{formik.errors.email}</div>
           ) : null}
-          {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+          {formik.touched.fullName && formik.errors.fullName ? (
+            <div>{formik.errors.fullName}</div>
           ) : null} 
       </Row>
 

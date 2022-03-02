@@ -21,7 +21,7 @@ const fetchUser = async (t, store) => {
   }
 }
 
-const BookList = observer(() => {
+const BookList = observer(({ userId }) => {
   // const { booksStore, authorsStore } = useStore();
   const { booksStore, userStore, modalsStore, authorsStore } = useStore();
   const token = cookies.get('token');
