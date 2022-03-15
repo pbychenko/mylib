@@ -7,7 +7,7 @@ import Image from 'next/image'
 const Book= () => {
   return (
     <>      
-      <Navibar />
+      {/* <Navibar /> */}
       <Container className="mt-2">
         <Row>
           <Col xs={6} md={6}>

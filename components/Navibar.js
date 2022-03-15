@@ -1,28 +1,38 @@
-import { observer } from 'mobx-react-lite'
-// import { useStore } from './StoreProvider'
 import { Container, Navbar, Nav } from 'react-bootstrap';
+import Link from 'next/link';
 
-const Navibar = observer((props) => {
-  return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Techno Lib</Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-                <Nav.Link href="#features">Каталог</Nav.Link>
-                <Nav.Link href="#features">Авторы</Nav.Link>
-                <Nav.Link href="#features">Пользователи</Nav.Link>
-            </Nav>
-            <Nav>
-                <Nav.Link eventKey={2} href="#memes">
-                Личный кабинет
-                </Nav.Link>
-            </Nav>
-            </Navbar.Collapse>
-        </Container>
-    </Navbar>
-  )
-})
+const Navibar = () => (
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Container>              
+      <Link href="/" passHref>
+        <Navbar.Brand>
+          Techno Lib
+        </Navbar.Brand>
+      </Link>             
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto">
+          <Link href="/catalog" passHref>
+            <Nav.Link>Каталог</Nav.Link>
+          </Link>
+          <Link href="/authors" passHref>
+            <Nav.Link>Авторы</Nav.Link>
+          </Link>
+          <Link href="/genres" passHref>
+            <Nav.Link>Жанры</Nav.Link>
+          </Link>
+          <Link href="/users" passHref>
+            <Nav.Link>Пользователи</Nav.Link>
+          </Link>
+      </Nav>
+      <Nav>
+        <Link href="/cabinet" passHref>
+          <Nav.Link>Личный кабинет</Nav.Link>
+        </Link>
+      </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
+);
 
 export default Navibar;

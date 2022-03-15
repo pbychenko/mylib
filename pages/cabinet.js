@@ -1,7 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 // import Page from '../components/Page'
-import { observer } from 'mobx-react-lite'
-import Navibar from '../components/Navibar';
+import { observer } from 'mobx-react-lite';
 import PersonalInfoForm from '../components/PersonalInfoForm';
 import BookList from '../components/BookList';
 import { Container, Button, Form } from 'react-bootstrap';
@@ -89,8 +88,7 @@ const Cabinet = observer(() => {
   console.log('test', userStore.currentUser)
 
   return (
-    <>      
-      <Navibar />
+    <>  
       <Container className="mt-2">
           <h2>Профиль</h2>
           {userStore.currentUser ? <PersonalInfoForm /> : null }

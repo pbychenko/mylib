@@ -1,5 +1,4 @@
 import { Button } from 'react-bootstrap';
-import Navibar from '../components/Navibar';
 import GenresList from '../components/GenresList'; 
 import { Container } from 'react-bootstrap';
 // import { observer } from 'mobx-react-lite'
@@ -19,8 +18,7 @@ const Genres = () => {
 //   }, [genres])  
 
   return (
-    <>      
-      <Navibar />
+    <> 
       <Container className="mt-2">
         <GenresList />
       </Container>
