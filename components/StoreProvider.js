@@ -26,7 +26,7 @@ export function StoreProvider({ children, initialState: initialData }) {
 function initializeStore(initialData = {
   counter: 2,
   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
-  genresStore: [],
+  genreStore: [],
   authorsStore: [],
   booksStore: [],
   userStore: {
@@ -42,7 +42,7 @@ function initializeStore(initialData = {
   // console.log('test')
   const _store = store ?? new Store()
   // console.log(_store.genres)
-  _store.genresStore.fetchGenres()
+  _store.genreStore.fetchGenres()
   _store.authorsStore.fetchAuthors()
   _store.userStore.fetchUsers()
   _store.booksStore.fetchBooks()

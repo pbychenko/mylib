@@ -8,7 +8,7 @@ import { useStore } from '../StoreProvider'
 
 
 const AddGenreModal = ({ token }) => {
-  const { modalsStore, genresStore } = useStore();
+  const { modalsStore, genreStore } = useStore();
 
   const handleHideModal = () => {
     modalsStore.hideModal();
@@ -32,7 +32,7 @@ const AddGenreModal = ({ token }) => {
       const data = {  ...values  };
       console.log(data)
       try {
-        genresStore.addGenre(data, token)
+        genreStore.addGenre(data, token)
         setSubmitting(false);
         modalsStore.hideModal();
         resetForm();

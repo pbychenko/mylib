@@ -49,7 +49,7 @@ import {  makeAutoObservable } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
 import Counter from './stores/Counter';
 import Todo from './stores/Todo';
-import GenresStore from './stores/GenresStore';
+import GenreStore from './stores/GenreStore';
 import AuthorsStore from './stores/AuthorsStore';
 import BooksStore from './stores/BooksStore';
 import UserStore from './stores/UserStore';
@@ -62,7 +62,7 @@ export class Store {
     makeAutoObservable(this)
     this.counter = new Counter();
     this.todo = new Todo();
-    this.genresStore = new GenresStore(this);
+    this.genreStore = new GenreStore(this);
     this.authorsStore = new AuthorsStore(this);
     this.booksStore = new BooksStore(this);
     this.userStore = new UserStore(this)
@@ -74,7 +74,7 @@ export class Store {
 
     this.counter.hydrate(data.counter);
     this.todo.hydrate(data.todo);
-    this.genresStore.hydrate(data.genres);
+    this.genreStore.hydrate(data.genres);
     this.authorsStore.hydrate(data.authors);
     this.booksStore.hydrate(data.books);
     this.userStore.hydrate(data.users)

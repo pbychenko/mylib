@@ -4,7 +4,7 @@ import axios from 'axios';
 
 enableStaticRendering(typeof window === 'undefined')
 
-export default class GenresStore {
+export default class GenreStore {
   genres = []
   rootStore
 

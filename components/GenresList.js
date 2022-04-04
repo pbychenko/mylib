@@ -20,7 +20,7 @@ const fetchUser = async (t, store) => {
 }
 
 const GenresList = observer(() => {
-  const { genresStore, userStore, modalsStore } = useStore();
+  const { genreStore, userStore, modalsStore } = useStore();
   const token = cookies.get('token');
 
   useEffect(() => {    
@@ -43,7 +43,7 @@ const GenresList = observer(() => {
   return (
     <>
       <Row>     
-          {genresStore.genres.map((genre) => 
+          {genreStore.genres.map((genre) => 
             (<Col key={genre.id} md={3}>
               <Card style={{ width: '18rem' }}>
                 <Card.Body> 
