@@ -115,7 +115,6 @@ const PersonalInfoForm = observer(() => {
           <Form.Control 
             placeholder="Ваше имя"
             type="text"
-            placeholder="имя"
             {...formik.getFieldProps('fullName')}
             style={textBorderColorStyle}
             value ={formik.values.fullName}

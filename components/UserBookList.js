@@ -22,10 +22,10 @@ const fetchUser = async (t, store) => {
   }
 }
 
-const UserBookList = ({userId}) => {
+const UserBookList = observer(({userId}) => {
   // const { booksStore, authorsStore } = useStore();
   const { booksStore, userStore, authorsStore } = useStore();
-  // const token = cookies.get('token');
+  const token = cookies.get('token');
 
   // useEffect(() => {    
   //   if (token) {
@@ -75,7 +75,7 @@ const UserBookList = ({userId}) => {
               .map(author => (              
                 <Card.Subtitle className="mb-2 text-muted" key={author.id}>{author.name} {author.last_name}</Card.Subtitle>
               ))}              
-              {/* {(!book.holderId && userStore.isAuth) ? (<Button variant="primary" onClick={()=> booksStore.setHolder(book, userStore.currentUser.id, token)}>Взять</Button>) : null} */}
+              <Button variant="primary" onClick={()=> booksStore.setHolder(book, null, token)}>Вернуть</Button>
               </Card.Body>
           </Card>
       </Col>)
@@ -83,6 +83,6 @@ const UserBookList = ({userId}) => {
     </Row>
     </>         
   )
-}
+})
 
 export default UserBookList;
