@@ -2,7 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 // import Page from '../components/Page'
 import { observer } from 'mobx-react-lite';
 import PersonalInfoForm from '../components/PersonalInfoForm';
-import BookList from '../components/BookList';
+import UserBookList from '../components/UserBookList';
 import { Container, Button, Form } from 'react-bootstrap';
 import Image from 'next/image'
 import cookies from 'js-cookie';
@@ -72,21 +72,6 @@ const Cabinet = observer(() => {
     }   
   }, []);
 
-  // useEffect(async () => {
-  //   if (!token) {
-  //     router.push('/');
-  //   }  
-  //   if (token) {
-  //     // console.log('before')
-  //     user = fetchUser(token, userStore)
-  //     if (!user) {
-  //       router.push('/');
-  //     }
-  //   }    
-    
-  // }, []);
-  console.log('test', userStore.currentUser)
-
   return (
     <>  
       <Container className="mt-2">
@@ -94,8 +79,7 @@ const Cabinet = observer(() => {
           {userStore.currentUser ? <PersonalInfoForm /> : null }
           {/* <PersonalInfoForm user={user}/> */}
           {/* <h2>Взятые книги</h2> */}
-          {userStore.currentUser ? <BookList /> : null }
-          {/* <BookList books={books}/> */}
+          {userStore.currentUser ? <UserBookList userId={userStore.currentUser.id} /> : null }
       </Container>
     </>
   )

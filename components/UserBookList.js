@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import getModal from './modals/index';
 import Image from 'next/image';
+import UserList from './UsersList';
 
 const fetchUser = async (t, store) => {
   try {
@@ -21,17 +22,17 @@ const fetchUser = async (t, store) => {
   }
 }
 
-const BookList = observer(() => {
+const UserBookList = ({userId}) => {
   // const { booksStore, authorsStore } = useStore();
-  const { booksStore, userStore, modalsStore, authorsStore } = useStore();
-  const token = cookies.get('token');
+  const { booksStore, userStore, authorsStore } = useStore();
+  // const token = cookies.get('token');
 
-  useEffect(() => {    
-    if (token) {
-      // console.log('before')
-      const user = fetchUser(token, userStore)
-    }
-  }, [])
+  // useEffect(() => {    
+  //   if (token) {
+  //     // console.log('before')
+  //     const user = fetchUser(token, userStore)
+  //   }
+  // }, [])
   // console.log('useыы', userStore.isAuth)
   // setLoading(true)
   //   if (!token) {
@@ -50,20 +51,15 @@ const BookList = observer(() => {
   //       });
   //   }
 
-  const renderModal = () => {
-    if (modalsStore.modalName === '') {
-      return null;
-    }
-
-    const ModalComponent = getModal(modalsStore.modalName);
-    return (<ModalComponent token={token} />);
-  };
+ 
   // console.log(booksStore.books)
+  const userBooks = booksStore.books.filter(book => book.holderId === userId)
+  console.log('userId',userId)
   
   return (
     <>
     <Row>     
-      {booksStore.books.map((book) => 
+      {userBooks.map((book) => 
           (<Col key={book.id} md={3}>
           <Card style={{ width: '18rem' }} >
               <Image
@@ -79,17 +75,14 @@ const BookList = observer(() => {
               .map(author => (              
                 <Card.Subtitle className="mb-2 text-muted" key={author.id}>{author.name} {author.last_name}</Card.Subtitle>
               ))}              
-              {(!book.holderId && userStore.isAuth) ? (<Button variant="primary" onClick={()=> booksStore.setHolder(book, userStore.currentUser.id, token)}>Взять</Button>) : null}
-              {book.holderId ? (<Card.Text> Кто взял: {userStore.users.filter(user => user.id === book.holderId)[0].full_name}</Card.Text>) : null}
+              {/* {(!book.holderId && userStore.isAuth) ? (<Button variant="primary" onClick={()=> booksStore.setHolder(book, userStore.currentUser.id, token)}>Взять</Button>) : null} */}
               </Card.Body>
           </Card>
       </Col>)
       )}
     </Row>
-      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addBookModal')}>Добавить книгу</Button>) : null }
-      {renderModal()}
     </>         
   )
-})
+}
 
-export default BookList;
+export default UserBookList;

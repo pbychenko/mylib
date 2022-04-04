@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
 import { Col, Button, Row, Card } from 'react-bootstrap';
 
-const GenresList = observer(() => {
+const UserList = observer(() => {
   const { userStore } = useStore();
   return (
     <>
@@ -23,4 +23,4 @@ const GenresList = observer(() => {
   )
 })
 
-export default GenresList;
+export default UserList;

@@ -74,8 +74,9 @@ export class Store {
 
     this.counter.hydrate(data.counter);
     this.todo.hydrate(data.todo);
-    this.genresStore.hydrate(data.genresStore);
-    this.authorsStore.hydrate(data.authorsStore);
+    this.genresStore.hydrate(data.genres);
+    this.authorsStore.hydrate(data.authors);
     this.booksStore.hydrate(data.books);
+    this.userStore.hydrate(data.users)
   }
 }

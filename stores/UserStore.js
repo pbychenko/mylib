@@ -8,6 +8,7 @@ export default class UserStore {
   isAuth = false
   currentUser = null
   users = []
+  rootStore
 
   constructor(rootStore) {
     makeAutoObservable(this)
@@ -30,28 +31,13 @@ export default class UserStore {
     return this.currentUser
   }
 
-  // addAuthor= async (userData) => {
-  //   const { name, lastName } = authorData
-  //   const res = await axios.post('http://localhost:3333/api/authors', {
-  //     name,
-  //     lastName,
-  //   });
-  //   console.log(res.data)    
-  //   this.authors.push({id: res.data, name, last_name: lastName});
-  // }
-
   fetchUsers = async () => {
     const users = (await axios.get('http://localhost:3333/api/users')).data;
-    // console.log(authors)
 
     runInAction(() => {
       this.users = users;      
     })
   }
-
-  // get usersData() {
-  //   return this.;
-  // }
 
   hydrate = (data) => {
     if (!data) return;

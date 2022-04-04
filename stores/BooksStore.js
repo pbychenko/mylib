@@ -18,29 +18,47 @@ export default class BooksStore {
     this.rootStore = rootStore
   }
 
-  addBook = async (bookData) => {
+  addBook = async (bookData, token) => {
     const { title, about, genreId, authorIds } = bookData
     const res = await axios.post('http://localhost:3333/api/books', {
-      title,
-      about,
-      genreId,
-      authorIds
-    });
+        title,
+        about,
+        genreId,
+        authorIds
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     console.log(authorIds)
-    // console.log(res.data)
-    // console.log('res.data', res.data)
 
-    this.books.push({ id: res.data.id, title, about, authorIds }); 
+    this.books.push({ id: res.data.id, title, about, authorIds });
 
-    // runInAction(() => {
-    //   this.books.push({ id: res.data.id, title, about, authorIds }); 
-    // })
-
-    console.log('hui', this.books)
+    // console.log('hui', this.books)
 
     
     // this.books.push({ id: res.data.id, title, about, authorIds });
     // console.log(this.books)
+  }
+
+  setHolder = async (book, holderId, token) => {
+    // const { title, about, genreId, authorIds } = bookData
+    const res = await axios.patch(`http://localhost:3333/api/books/${book.id}`, {
+        holderId
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    // console.log(authorIds)
+    // // console.log(res.data)
+    // // console.log('res.data', res.data)
+
+    // this.books.push({ id: res.data.id, title, about, authorIds }); 
+
+    runInAction(() => {
+      // this.books.push({ id: res.data.id, title, about, authorIds });
+      // this.books.push({ id: res.data.id, title, about, authorIds });
+      book.holderId = holderId;
+    })
+
+    // console.log(userId)
   }
 
   // deleteItem(id) {
