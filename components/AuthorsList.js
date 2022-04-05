@@ -20,7 +20,7 @@ const fetchUser = async (t, store) => {
 }
 
 const AuthorsList = observer(() => {
-  const { authorsStore, userStore, modalsStore } = useStore();
+  const { authorStore, userStore, modalStore } = useStore();
   const token = cookies.get('token');
 
   useEffect(() => {    
@@ -32,17 +32,17 @@ const AuthorsList = observer(() => {
   // console.log('useыы', userStore.isAuth)
 
   const renderModal = () => {
-    if (modalsStore.modalName === '') {
+    if (modalStore.modalName === '') {
       return null;
     }
 
-    const ModalComponent = getModal(modalsStore.modalName);
+    const ModalComponent = getModal(modalStore.modalName);
     return (<ModalComponent token={token} />);
   };
   return (
     <>
       <Row>     
-          {authorsStore.authors.map((author) => 
+          {authorStore.authors.map((author) => 
             (<Col key={author.id} md={3}>
               <Card style={{ width: '18rem' }}>
                 <Card.Body> 
@@ -54,7 +54,7 @@ const AuthorsList = observer(() => {
           )
           )}          
       </Row>
-      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addAuthorModal')}>Добавить автора</Button>) : null }
+      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalStore.showModal('addAuthorModal')}>Добавить автора</Button>) : null }
       {renderModal()} 
     </>    
   )

@@ -8,10 +8,10 @@ import { useStore } from '../StoreProvider'
 
 
 const AddBookModal = ({ token }) => {
-  const { modalsStore, authorsStore, booksStore, genresStore } = useStore();
+  const {modalStore, authorStore, booksStore, genreStore } = useStore();
 
   const handleHideModal = () => {
-    modalsStore.hideModal();
+    modalStore.hideModal();
   };
 
   const validate = (values) => {
@@ -40,7 +40,7 @@ const AddBookModal = ({ token }) => {
       try {
         booksStore.addBook(data, token)
         setSubmitting(false);
-        modalsStore.hideModal();
+        modalStore.hideModal();
         resetForm();
       } catch (er) {
         setSubmitting(true);
@@ -95,7 +95,7 @@ const AddBookModal = ({ token }) => {
                  className="mb-3"
                  >
                   <option>Open this select menu</option>
-                  {genresStore.genres.map((genre) => 
+                  {genreStore.genres.map((genre) => 
                     (<option key={genre.id} value={genre.id}>{genre.title}</option>))
                   }
                 </Form.Select>
@@ -106,7 +106,7 @@ const AddBookModal = ({ token }) => {
                  multiple
                  >
                   <option>Open this select menu</option>
-                  {authorsStore.authors.map((author) => 
+                  {authorStore.authors.map((author) => 
                     (<option key={author.id} value={author.id}>{author.name} {author.last_name}</option>))
                   }
                 </Form.Select>

@@ -24,7 +24,7 @@ const fetchUser = async (t, store) => {
 
 const UserBookList = observer(({userId}) => {
   // const { booksStore, authorsStore } = useStore();
-  const { booksStore, userStore, authorsStore } = useStore();
+  const { bookStore, userStore, authorStore } = useStore();
   const token = cookies.get('token');
 
   // useEffect(() => {    
@@ -53,7 +53,7 @@ const UserBookList = observer(({userId}) => {
 
  
   // console.log(booksStore.books)
-  const userBooks = booksStore.books.filter(book => book.holderId === userId)
+  const userBooks = bookStore.books.filter(book => book.holderId === userId)
   console.log('userId',userId)
   
   return (
@@ -71,11 +71,11 @@ const UserBookList = observer(({userId}) => {
               <Card.Body> 
               <Card.Title>{book.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{book.about}</Card.Subtitle>
-              {authorsStore.authors.filter(author => (book.authorIds.includes(author.id)))
+              {authorStore.authors.filter(author => (book.authorIds.includes(author.id)))
               .map(author => (              
                 <Card.Subtitle className="mb-2 text-muted" key={author.id}>{author.name} {author.last_name}</Card.Subtitle>
               ))}              
-              <Button variant="primary" onClick={()=> booksStore.setHolder(book, null, token)}>Вернуть</Button>
+              <Button variant="primary" onClick={()=> bookStore.setHolder(book, null, token)}>Вернуть</Button>
               </Card.Body>
           </Card>
       </Col>)

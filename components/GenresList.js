@@ -20,7 +20,7 @@ const fetchUser = async (t, store) => {
 }
 
 const GenresList = observer(() => {
-  const { genreStore, userStore, modalsStore } = useStore();
+  const { genreStore, userStore, modalStore } = useStore();
   const token = cookies.get('token');
 
   useEffect(() => {    
@@ -32,11 +32,11 @@ const GenresList = observer(() => {
   // console.log('useыы', userStore.isAuth)
 
   const renderModal = () => {
-    if (modalsStore.modalName === '') {
+    if (modalStore.modalName === '') {
       return null;
     }
 
-    const ModalComponent = getModal(modalsStore.modalName);
+    const ModalComponent = getModal(modalStore.modalName);
     return (<ModalComponent token={token} />);
   };
 
@@ -54,7 +54,7 @@ const GenresList = observer(() => {
           )
           )}          
       </Row>
-      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalsStore.showModal('addGenreModal')}>Добавить жанр</Button>) : null }
+      {userStore.isAuth ? (<Button variant="primary" onClick={()=> modalStore.showModal('addGenreModal')}>Добавить жанр</Button>) : null }
       {renderModal()}      
     </>    
   )

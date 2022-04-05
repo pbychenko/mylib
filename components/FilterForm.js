@@ -4,7 +4,7 @@ import { Col, Button, Row, Form, Card } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
 const FilterForm = observer(() => {
-  const { authorsStore, booksStore, genreStore } = useStore();
+  const { authorStore, booksStore, genreStore } = useStore();
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +40,7 @@ const FilterForm = observer(() => {
                  >
                   {/* <option value='all' selected>Выберите автора</option> */}
                   <option value="">Выберите автора</option>
-                  {authorsStore.authors.map((author) => (
+                  {authorStore.authors.map((author) => (
                     <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
                   ))}                    
                 </Form.Select>

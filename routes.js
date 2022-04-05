@@ -7,6 +7,6 @@ export default {
   authorPath: (id) => [host, prefix, 'authors', id].join('/'),
   booksPath: () => [host, prefix, 'books'].join('/'),
   bookPath: (id) => [host, prefix, 'books', id].join('/'),
-  userssPath: () => [host, prefix, 'users'].join('/'),
+  usersPath: () => [host, prefix, 'users'].join('/'),
   userPath: (id) => [host, prefix, 'users', id].join('/'),
 };

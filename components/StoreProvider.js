@@ -27,14 +27,14 @@ function initializeStore(initialData = {
   counter: 2,
   todo: [ { id:1, title:'a'}, { id:2, title:'b'} ],
   genreStore: [],
-  authorsStore: [],
-  booksStore: [],
+  authorStore: [],
+  bookStore: [],
   userStore: {
     users: [],
     isAuth: false,
     currentUser: {},
   },
-  modalsStore: '',
+  modalStore: '',
 })
  {
     // console.log(initialData.genres)
@@ -43,9 +43,9 @@ function initializeStore(initialData = {
   const _store = store ?? new Store()
   // console.log(_store.genres)
   _store.genreStore.fetchGenres()
-  _store.authorsStore.fetchAuthors()
+  _store.authorStore.fetchAuthors()
   _store.userStore.fetchUsers()
-  _store.booksStore.fetchBooks()
+  _store.bookStore.fetchBooks()
   
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details

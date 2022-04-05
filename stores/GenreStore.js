@@ -1,52 +1,39 @@
 import { runInAction, makeAutoObservable } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
 import axios from 'axios';
+import routes from '../routes';
 
-enableStaticRendering(typeof window === 'undefined')
+enableStaticRendering(typeof window === 'undefined');
 
 export default class GenreStore {
-  genres = []
-  rootStore
-
-  // constructor(rootStore) {
-  //   makeAutoObservable(this, { rootStore: false })
-  //   this.rootStore = rootStore
-  // }
+  genres = [];
+  rootStore;
 
   constructor(rootStore) {
-    makeAutoObservable(this)
-    this.rootStore = rootStore
+    makeAutoObservable(this);
+    this.rootStore = rootStore;
   }
 
   addGenre = async (genreData, token) => {
-    const res = await axios.post('http://localhost:3333/api/genres',
-      genreData,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log('in methods', res.data)
-    // console.log('in methods', title)  
-    this.genres.push({id: res.data, title: genreData.title});
+    const url = routes.genresPath();
+    try {
+      const { data: id } = await axios.post(url, genreData, { headers: { Authorization: `Bearer ${token}` } });
+      this.genres.push({ id, title: genreData.title });
+    } catch (e) {
+      console.log(e);
+    }
   }
-
-  // deleteItem(id) {
-  //   this.todos = this.todos.filter(el => el.id !== id);
-  // }
-
-  // changeItem(id) {
-  //   this.todos = this.todos.map(el => el.id === id ? { ...el, title: el.title +'c' } : el);
-  // }
 
   fetchGenres = async () => {
-    const genres = (await axios.get('http://localhost:3333/api/genres')).data;
-
-
-    runInAction(() => {
-      this.genres = genres;      
-    })
-  }
-
-  get genresData() {
-    return this.genres;
+    const url = routes.genresPath();
+    try {
+      const { data: genres } = await axios.get(url);
+      runInAction(() => {
+        this.genres = genres;      
+      });
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   hydrate = (data) => {

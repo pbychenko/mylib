@@ -50,10 +50,10 @@ import { enableStaticRendering } from 'mobx-react-lite'
 import Counter from './stores/Counter';
 import Todo from './stores/Todo';
 import GenreStore from './stores/GenreStore';
-import AuthorsStore from './stores/AuthorsStore';
-import BooksStore from './stores/BooksStore';
+import AuthorStore from './stores/AuthorStore';
+import BookStore from './stores/BookStore';
 import UserStore from './stores/UserStore';
-import ModalsStore from './stores/ModalsStore';
+import ModalStore from './stores/ModalStore';
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -63,10 +63,10 @@ export class Store {
     this.counter = new Counter();
     this.todo = new Todo();
     this.genreStore = new GenreStore(this);
-    this.authorsStore = new AuthorsStore(this);
-    this.booksStore = new BooksStore(this);
-    this.userStore = new UserStore(this)
-    this.modalsStore = new ModalsStore(this)
+    this.authorStore = new AuthorStore(this);
+    this.modalStore = new ModalStore(this);
+    this.userStore = new UserStore(this);
+    this.bookStore = new BookStore(this);
   }
 
   hydrate(data) {
@@ -75,8 +75,8 @@ export class Store {
     this.counter.hydrate(data.counter);
     this.todo.hydrate(data.todo);
     this.genreStore.hydrate(data.genres);
-    this.authorsStore.hydrate(data.authors);
-    this.booksStore.hydrate(data.books);
+    this.authorStore.hydrate(data.authors);
+    this.bookStore.hydrate(data.books);
     this.userStore.hydrate(data.users)
   }
 }

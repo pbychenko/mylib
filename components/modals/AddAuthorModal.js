@@ -8,10 +8,10 @@ import { useStore } from '../StoreProvider'
 
 
 const AddAuthorModal = ({ token }) => {
-  const { modalsStore, authorsStore } = useStore();
+  const { modalStore, authorStore } = useStore();
 
   const handleHideModal = () => {
-    modalsStore.hideModal();
+    modalStore.hideModal();
   };
 
   const validate = (values) => {
@@ -37,9 +37,9 @@ const AddAuthorModal = ({ token }) => {
       const data = {  ...values  };
       console.log(data)
       try {
-        authorsStore.addAuthor(data, token)
+        authorStore.addAuthor(data, token)
         setSubmitting(false);
-        modalsStore.hideModal();
+        modalStore.hideModal();
         resetForm();
       } catch (er) {
         setSubmitting(true);
