@@ -1,14 +1,12 @@
-import React, { useRef } from 'react';
-import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { useStore } from '../StoreProvider'
+import { useStore } from '../StoreProvider';
 
 
 const AddBookModal = ({ token }) => {
-  const {modalStore, authorStore, booksStore, genreStore } = useStore();
+  const { modalStore, authorStore, bookStore, genreStore } = useStore();
 
   const handleHideModal = () => {
     modalStore.hideModal();
@@ -16,12 +14,25 @@ const AddBookModal = ({ token }) => {
 
   const validate = (values) => {
     const errors = {};
+
     if (!values.title) {
-      errors.name = 'Required';
+      errors.title = 'Заполните поле';
+    } else if (values.title.length < 4) {
+      errors.title = 'Название должно быть подлиннее';
     }
 
     if (!values.about) {
-      errors.about = 'Required';
+      errors.about = 'Заполните поле';
+    } else if (values.about.length < 4) {
+      errors.about = 'Описание должно быть подлиннее';
+    }
+
+    if (!values.genreId) {
+      errors.genreId = 'Выберите жанр';
+    }
+
+    if (!values.authorIds) {
+      errors.authorIds = 'Укажите авторов';
     }
 
     return errors;
@@ -33,19 +44,17 @@ const AddBookModal = ({ token }) => {
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      // const url = routes.channelsPath();
       const authorIds = values.authorIds.map(el => +el);
-      const data = {  ...values, authorIds  };
-      console.log(data)
+      const data = { ...values, authorIds };
       try {
-        booksStore.addBook(data, token)
+        await bookStore.addBook(data, token)
         setSubmitting(false);
         modalStore.hideModal();
         resetForm();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'networkError');
-        throw er;
+        setFieldError('connection', 'Ошибка сети');
+        console.log(er);
       }
     },
   });
@@ -59,7 +68,6 @@ const AddBookModal = ({ token }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       animation
-      // onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
         <Modal.Title>Добавить книгу</Modal.Title>
@@ -72,22 +80,23 @@ const AddBookModal = ({ token }) => {
                 <Form.Control
                   type="text"
                   placeholder="Название"
-                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('title')}
-                  // ref={inputEl}
                   style={textBorderColorStyle}
                   className="mb-3"
                 />
-
+                {formik.touched.title && formik.errors.title ? (
+                  <div>{formik.errors.title}</div>
+                ) : null}
                 <Form.Control
                   type="text"
                   placeholder="О чем?"
-                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('about')}
-                  // ref={inputEl}
                   style={textBorderColorStyle}
                   className="mb-3"
                 />
+                {formik.touched.about && formik.errors.about ? (
+                  <div>{formik.errors.about}</div>
+                ) : null}
 
                 <Form.Select
                  aria-label="Default select example"
@@ -99,7 +108,9 @@ const AddBookModal = ({ token }) => {
                     (<option key={genre.id} value={genre.id}>{genre.title}</option>))
                   }
                 </Form.Select>
-
+                {formik.errors.genreId ? (
+                  <div>{formik.errors.genreId}</div>
+                ) : null}
                 <Form.Select
                  aria-label="Default select example"
                  {...formik.getFieldProps('authorIds')}
@@ -110,14 +121,13 @@ const AddBookModal = ({ token }) => {
                     (<option key={author.id} value={author.id}>{author.name} {author.last_name}</option>))
                   }
                 </Form.Select>
-
-                {formik.touched.title && formik.errors.title ? (
-                  <div>{formik.errors.title}</div>
-                ) : null}
-                {formik.touched.about && formik.errors.about ? (
-                  <div>{formik.errors.about}</div>
-                ) : null}
+                {formik.errors.authorIds ? (
+                  <div>{formik.errors.authorIds}</div>
+                ) : null}               
               </Form.Group>
+              { formik.errors.connection ? (
+                <div>{formik.errors.connection}</div>
+              ) : null}
               <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Добавить</Button>
             </Form>
           </Card.Body>
