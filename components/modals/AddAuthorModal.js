@@ -1,5 +1,3 @@
-import React, { useRef } from 'react';
-import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
@@ -17,15 +15,20 @@ const AddAuthorModal = ({ token }) => {
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
-      errors.name = 'Required';
+      errors.name = 'Заполните это поле';
+    } else if (values.name.length < 3) {
+        errors.name = 'Имя должно быть подлиннее';
     }
 
     if (!values.lastName) {
-      errors.lastName = 'Required';
+      errors.lastName = 'Заполните это поле';
+    } else if (values.lastName.length < 3) {
+      errors.lastName = 'Фамилия должна быть подлиннее';
     }
 
     return errors;
   };
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -33,9 +36,7 @@ const AddAuthorModal = ({ token }) => {
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      // const url = routes.channelsPath();
       const data = {  ...values  };
-      console.log(data)
       try {
         authorStore.addAuthor(data, token)
         setSubmitting(false);
@@ -43,12 +44,11 @@ const AddAuthorModal = ({ token }) => {
         resetForm();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'networkError');
+        setFieldError('connection', 'Ошибка сети');
         throw er;
       }
     },
   });
-  // const inputEl = useRef(null);
   const textBorderColorStyle = formik.errors.name ? { borderColor: 'red' } : null;
 
   return (
@@ -58,7 +58,6 @@ const AddAuthorModal = ({ token }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       animation
-      // onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
         <Modal.Title>Добавить жанр</Modal.Title>
@@ -71,28 +70,24 @@ const AddAuthorModal = ({ token }) => {
                 <Form.Control
                   type="text"
                   placeholder="Имя"
-                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('name')}
-                  // ref={inputEl}
                   style={textBorderColorStyle}
                   className="mb-3"
-                />
-                <Form.Control
-                  type="text"
-                  placeholder="Фамилия"
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...formik.getFieldProps('lastName')}
-                  // ref={inputEl}
-                  style={textBorderColorStyle}
                 />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}
+                <Form.Control
+                  type="text"
+                  placeholder="Фамилия"
+                  {...formik.getFieldProps('lastName')}
+                  style={textBorderColorStyle}
+                />                
                 {formik.touched.lastName && formik.errors.lastName ? (
                   <div>{formik.errors.lastName}</div>
                 ) : null}
               </Form.Group>
-              <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Добавить</Button>
+              <Button variant="primary" type="submit" disabled={formik.isSubmitting}>Добавить</Button>
             </Form>
           </Card.Body>
         </Card>

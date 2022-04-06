@@ -1,5 +1,3 @@
-import React, { useRef } from 'react';
-import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
@@ -17,33 +15,33 @@ const AddGenreModal = ({ token }) => {
   const validate = (values) => {
     const errors = {};
     if (!values.title) {
-      errors.title = 'Required';
-    }
+      errors.title = 'Заполните поле';
+    } else if (values.title.length < 3) {
+      errors.title = 'Название жанра должно быть подлиннее';
+    }        
 
     return errors;
   };
+
   const formik = useFormik({
     initialValues: {
       title: '',
     },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      // const url = routes.channelsPath();
       const data = {  ...values  };
-      console.log(data)
       try {
-        genreStore.addGenre(data, token)
+        await genreStore.addGenre(data, token)
         setSubmitting(false);
         modalStore.hideModal();
         resetForm();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'networkError');
-        throw er;
+        setFieldError('connection', 'Ошибка сети');
+        console.log(er);
       }
     },
   });
-  // const inputEl = useRef(null);
   const textBorderColorStyle = formik.errors.title ? { borderColor: 'red' } : null;
 
   return (
@@ -53,7 +51,6 @@ const AddGenreModal = ({ token }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       animation
-      // onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
         <Modal.Title>Добавить жанр</Modal.Title>
@@ -66,16 +63,17 @@ const AddGenreModal = ({ token }) => {
                 <Form.Control
                   type="text"
                   placeholder="Жанр"
-                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('title')}
-                  // ref={inputEl}
                   style={textBorderColorStyle}
                 />
                 {formik.touched.title && formik.errors.title ? (
                   <div>{formik.errors.title}</div>
                 ) : null}
               </Form.Group>
-              <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Добавить</Button>
+              { formik.errors.connection ? (
+                <div>{formik.errors.connection}</div>
+              ) : null}
+              <Button variant="primary" type="submit" disabled={formik.isSubmitting}>Добавить</Button>
             </Form>
           </Card.Body>
         </Card>

@@ -10,4 +10,6 @@ export default {
   usersPath: () => [host, prefix, 'users'].join('/'),
   userPath: (id) => [host, prefix, 'users', id].join('/'),
   profilePath: () => [host, prefix, 'profile'].join('/'),
+  loginPath: () => [host, prefix, 'login'].join('/'),
+  registerPath: () => [host, prefix, 'register'].join('/'),
 };

@@ -16,12 +16,8 @@ export default class GenreStore {
 
   addGenre = async (genreData, token) => {
     const url = routes.genresPath();
-    try {
-      const { data: id } = await axios.post(url, genreData, { headers: { Authorization: `Bearer ${token}` } });
-      this.genres.push({ id, title: genreData.title });
-    } catch (e) {
-      console.log(e);
-    }
+    const { data: id } = await axios.post(url, genreData, { headers: { Authorization: `Bearer ${token}` } });
+    this.genres.push({ id, title: genreData.title });
   }
 
   fetchGenres = async () => {

@@ -17,13 +17,8 @@ export default class AuthorStore {
   addAuthor= async (authorData, token) => {
     const url = routes.authorsPath();
     const { name, lastName: last_name } = authorData;
-
-    try {
-      const { data } = await axios.post(url, authorData, { headers: { Authorization: `Bearer ${token}` } });
-      this.authors.push({ id: data, name, last_name });
-    } catch (e) {
-      console.log(e);
-    }
+    const { data } = await axios.post(url, authorData, { headers: { Authorization: `Bearer ${token}` } });
+    this.authors.push({ id: data, name, last_name });
   }
 
   fetchAuthors = async () => {
