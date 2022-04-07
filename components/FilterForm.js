@@ -1,36 +1,30 @@
 import { observer } from 'mobx-react-lite'
 import { useStore } from './StoreProvider'
-import { Col, Button, Row, Form, Card } from 'react-bootstrap';
+import { Col, Button, Row, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
 const FilterForm = observer(() => {
-  const { authorStore, booksStore, genreStore } = useStore();
+  const { authorStore, bookStore, genreStore } = useStore();
 
   const formik = useFormik({
     initialValues: {
       authorId: '',
       genreId: '',
     },
-    // validate,
-    onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      // const url = routes.channelsPath();
+    onSubmit: async (values, { setSubmitting, setFieldError }) => {
       const { authorId, genreId} = values;
-      // console.log(data)
       try {
-  //   console.log(e.target.author.value)
-        booksStore.fetchBooks(authorId, genreId)
+        bookStore.fetchBooks(authorId, genreId)
         setSubmitting(false);
-        // resetForm();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'networkError');
+        setFieldError('connection', 'Ошибка сети');
         throw er;
       }
     },
   });  
 
   return (
-    // <Form onSubmit={submitForm}>
     <Form onSubmit={formik.handleSubmit}>
         <Row className="mb-3">
             <Form.Group as={Col} controlId="formAuthor">
@@ -38,7 +32,6 @@ const FilterForm = observer(() => {
                 <Form.Select
                  {...formik.getFieldProps('authorId')}
                  >
-                  {/* <option value='all' selected>Выберите автора</option> */}
                   <option value="">Выберите автора</option>
                   {authorStore.authors.map((author) => (
                     <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
@@ -51,17 +44,19 @@ const FilterForm = observer(() => {
                 <Form.Select
                  {...formik.getFieldProps('genreId')}
                  >
-                  {/* <option value='all' selected>Выберите жанр</option> */}
                   <option value="">Выберите жанр</option>
                   {genreStore.genres.map((genre) => (
                     <option key={genre.id} value={genre.id}>{genre.title}</option>
                   ))}                    
                 </Form.Select>
             </Form.Group>
+            { formik.errors.connection ? (
+                <div>{formik.errors.connection}</div>
+              ) : null}
         </Row>
         <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Показать</Button>
   </Form>
   )
-})
+});
 
 export default FilterForm;

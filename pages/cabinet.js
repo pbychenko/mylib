@@ -32,7 +32,7 @@ const Cabinet = observer(() => {
           <h2>Профиль</h2>
           {userStore.currentUser ? <PersonalInfoForm /> : null }
           <h2>Взятые книги</h2>
-          {userStore.currentUser ? <UserBookList userId={userStore.currentUser.id} /> : null }
+          {userStore.currentUser ? <UserBookList /> : null }
       </Container>
     </>
   )
