@@ -48,8 +48,7 @@ const PersonalInfoForm = () => {
       }
     },
   });
-  const textBorderColorStyle = formik.errors.email ? { borderColor: 'red' } : null;
-  
+  const textBorderColorStyle = formik.errors.email ? { borderColor: 'red' } : null; 
 
   return (
     <Form onSubmit={formik.handleSubmit}>

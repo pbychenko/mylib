@@ -1,12 +1,14 @@
-import { StoreProvider } from '../components/StoreProvider'
-import 'bootstrap/dist/css/bootstrap.css'
-import Navibar from '../components/Navibar'
+import 'bootstrap/dist/css/bootstrap.css';
+import { StoreProvider } from '../components/StoreProvider';
+import Navibar from '../components/Navibar';
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (    
     <StoreProvider {...pageProps}>
        <Navibar />
       <Component {...pageProps} />
     </StoreProvider>
   )
-}
+};
+
+export default App;
