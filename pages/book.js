@@ -14,7 +14,7 @@ const Book= () => {
             <Image
               src="/images/test.jpg" // Route of the image file
               height={720} // Desired size with correct aspect ratio
-              width={470} // Desired size with correct aspect ratio
+              width={470} // Desied size with correct aspect ratio
               alt="Your Name"
             />
           </Col>
