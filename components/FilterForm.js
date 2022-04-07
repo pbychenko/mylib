@@ -27,32 +27,31 @@ const FilterForm = observer(() => {
   return (
     <Form onSubmit={formik.handleSubmit}>
         <Row className="mb-3">
-            <Form.Group as={Col} controlId="formAuthor">
-                <Form.Label>Автор</Form.Label>
-                <Form.Select
-                 {...formik.getFieldProps('authorId')}
-                 >
-                  <option value="">Выберите автора</option>
-                  {authorStore.authors.map((author) => (
-                    <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
-                  ))}                    
-                </Form.Select>
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGenre">
-                <Form.Label>Жанр</Form.Label>
-                <Form.Select
-                 {...formik.getFieldProps('genreId')}
-                 >
-                  <option value="">Выберите жанр</option>
-                  {genreStore.genres.map((genre) => (
-                    <option key={genre.id} value={genre.id}>{genre.title}</option>
-                  ))}                    
-                </Form.Select>
-            </Form.Group>
-            { formik.errors.connection ? (
-                <div>{formik.errors.connection}</div>
-              ) : null}
+          <Form.Group as={Col} controlId="formAuthor">
+            <Form.Label>Автор</Form.Label>
+            <Form.Select
+              {...formik.getFieldProps('authorId')}
+              >
+              <option value="">Выберите автора</option>
+              {authorStore.authors.map((author) => (
+                <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
+              ))}                    
+            </Form.Select>
+          </Form.Group>
+          <Form.Group as={Col} controlId="formGenre">
+            <Form.Label>Жанр</Form.Label>
+            <Form.Select
+              {...formik.getFieldProps('genreId')}
+              >
+              <option value="">Выберите жанр</option>
+              {genreStore.genres.map((genre) => (
+                <option key={genre.id} value={genre.id}>{genre.title}</option>
+              ))}                    
+            </Form.Select>
+          </Form.Group>
+          { formik.errors.connection ? (
+              <div>{formik.errors.connection}</div>
+            ) : null}
         </Row>
         <Button variant="primary" type="submit"  disabled={formik.isSubmitting}>Показать</Button>
   </Form>
