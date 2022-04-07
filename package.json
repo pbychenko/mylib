@@ -5,6 +5,9 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": {
+    "node": ">= 14"
+  },
   "dependencies": {
     "axios": "^0.24.0",
     "bootstrap": "^5.1.0",
