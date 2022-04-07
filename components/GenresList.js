@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite'
-import { useStore } from './StoreProvider'
+import { observer } from 'mobx-react-lite';
+import { useStore } from './StoreProvider';
 import { Col, Button, Row, Card } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import React, { useEffect } from 'react';

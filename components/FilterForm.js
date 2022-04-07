@@ -34,7 +34,7 @@ const FilterForm = observer(() => {
               >
               <option value="">Выберите автора</option>
               {authorStore.authors.map((author) => (
-                <option key={author.Id} value={author.id}>{author.name} {author.last_name}</option>
+                <option key={author.id} value={author.id}>{author.name} {author.last_name}</option>
               ))}                    
             </Form.Select>
           </Form.Group>
