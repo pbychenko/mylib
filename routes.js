@@ -1,4 +1,5 @@
-const host = 'http://localhost:3333';
+// const host = 'http://localhost:3333';
+const host = process.env.RESTURL;
 const prefix = 'api';
 
 export default {
