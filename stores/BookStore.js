@@ -15,6 +15,7 @@ export default class BookStore {
   }
 
   addBook = async (bookData, token) => {
+    const url = routes.booksPath();
     const { title, about, authorIds } = bookData;
     const { data: id } = await axios.post(url, bookData, { headers: { Authorization: `Bearer ${token}` } });
     this.books.push({ id: id, title, about, authorIds });
